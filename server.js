@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 var hbs = require("express-handlebars");
 
 // require db models
-var db = require(".models");
+var db = require("./models");
 
 // app configs
 var app = express();
@@ -25,7 +25,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/polishFinder";
 mongoose.connect(MONGODB_URI);
 
 // routes
-require("./routes/api.js")
+require("./routes/api.js")(app);
 
 // start server
 var PORT = process.env.PORT || 3377;

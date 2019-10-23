@@ -1,4 +1,5 @@
 module.exports = {
     Polish: require("./Polish"),
-    User: require("./User")
+    User: require("./User"),
+    Note: require("./Note")
 }

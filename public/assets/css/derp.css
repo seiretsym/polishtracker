@@ -1,0 +1,18 @@
+body {
+    background-image: url("https://wallpaperaccess.com/full/39632.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #000000;
+}
+
+.jumbotron {
+    background-color: rgba(120, 60, 170, 0.5);
+}
+
+.text-fabulous {
+    color: #FF00FF !important;
+}
+
+* {
+    border-radius: 20px !important;
+}
