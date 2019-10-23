@@ -17,6 +17,28 @@ module.exports = function (app) {
         })
     })
 
+    // sign in
+    app.put("/user/signin", function (req, res) {
+        db.User.find(req.body, function (err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.json(data);
+            }
+        })
+    })
+
+    // sign up
+    app.post("/user/register", function (req, res) {
+        db.User.create(req.body, function (err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.json(data);
+            }
+        })
+    })
+
     // scrape route
     app.get("/scrape", function (req, res) {
         // array for storing data
@@ -39,6 +61,7 @@ module.exports = function (app) {
     });
 }
 
+// scrape functions
 function scrapeLiveLove(root, path, cb) {
     var url = root + path;
     axios.get(url).then(function (response) {
@@ -65,10 +88,10 @@ function scrapeLiveLove(root, path, cb) {
             };
 
             // attempt to find
-            db.Polish.findOne(polish, function(err, data) {
+            db.Polish.findOne(polish, function (err, data) {
                 if (data) {
                     // update information
-                    db.Polish.update(polish, {$set: polish})
+                    db.Polish.update(polish, { $set: polish })
                     console.log("polish updated")
                 } else {
                     // insert into database if not found
@@ -117,7 +140,7 @@ function scrapeEmilyDeMolly(root, path, cb) {
             // attempt to find
             db.Polish.findOne(polish, function (err, data) {
                 if (data) {
-                    db.Polish.update(polish, {$set: polish})
+                    db.Polish.update(polish, { $set: polish })
                     console.log("polish updated")
                 } else {
                     // insert into database if not found

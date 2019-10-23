@@ -9,10 +9,10 @@
     {{!-- navbar --}}
     <ul class="nav">
         <li class="nav-item ml-3">
-            <a id="viewall" class="nav-link" href="#">View All Collections</a>
+            <a class="nav-link" href="/">View All Collections</a>
         </li>
         <li class="nav-item mr-auto">
-            <a id="viewsaved" class="nav-link" href="#">Your Saved Collection</a>
+            <a class="nav-link saved disabled" href="/saved">Your Saved Collection</a>
         </li>
         <li class="nav-item">
             <a id="signin" class="nav-link" href="#">Sign In</a>
@@ -42,8 +42,8 @@
                 <button id="register" class="btn btn-nebulous border-0 mt-2 text-nebulous w-75">Register</button>
             </div>
         </li>
-        <li class="nav-item d-none">
-            <a id="signout" class="nav-link" href="#">Sign Out</a>
+        <li class="nav-item">
+            <a id="signout" class="nav-link d-none" href="#">Sign Out</a>
         </li>
     </ul>
     <ul class="nav">
@@ -80,7 +80,7 @@
                     </a>
                     <span class="ml-auto">({{price}})</span></h5>
                     <hr>
-                    <button class="btn btn-nebulous text-nebulous w-100 wish" data-id="{{_id}}">Make a Wish</button>
+                    <a class="btn btn-nebulous text-nebulous w-100 wish rounded" data-id="{{_id}}">Make a Wish</a>
                 </div>
             </div>
             <div class="card text-nebulous p-3 d-none wishcard" data-id="{{_id}}">
@@ -102,7 +102,7 @@
                 </div>
                 <div class="pt-3 d-flex">
                     <input type="text" class="btn-nebulous border-0 text-nebulous pl-3 mr-3 wish" data-id="{{_id}}">
-                    <button class="btn btn-nebulous text-nebulous">Send</button>
+                    <a class="btn btn-nebulous text-nebulous send rounded disabled">Wish</a>
                 </div>
             </div>
         </div>
