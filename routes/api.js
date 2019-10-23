@@ -8,53 +8,129 @@ module.exports = function (app) {
 
     // main page
     app.get("/", function (req, res) {
-        res.render("index", { polish: "something" })
+        db.Polish.find({}, function (err, data) {
+            if (err) {
+                console.log(err)
+            } else {
+                res.render("index", { polish: data })
+            }
+        })
     })
 
     // scrape route
     app.get("/scrape", function (req, res) {
-        // First, we grab the body of the html with axios
-        axios.get("https://www.livelovepolish.com/collections/best-sellers").then(function (response) {
-
-            // need this to prepend to scraped hrefs
-            var root = "https://www.livelovepolish.com";
-
-            // Load the HTML into cheerio and save it to a variable
-            var $ = cheerio.load(response.data);
-
-            // An empty array to save the data that we'll scrape
-            var polishes = [];
-
-            // get them alllllllllllll
-            $("div.product-container").each(function (i, element) {
-                var name = $(element).find("h3.product-name").children().text();
-                var price = $(element).find("div.product-price").children().children().text();
-                var link = $(element).find("div.product-thumbnail").children("a").eq(1).attr("href");
-                var img = $(element).find(".product-featured-image").attr("src");
-                // push result into polishes as an object
-                var polish = {
-                    name: name,
-                    price: price,
-                    link: root + link,
-                    img: img
-                };
-
-                // attempt to find
-                db.Polish.findOne(polish, function (err, data) {
-                    if (data) {
-                        console.log("Already Exists")
-                    } else {
-                        // insert into database if not found
-                        db.Polish.create(polish);
-                    }
-                })
-
-                // push polish into polishes array for response data
-                polishes.push(polish);
+        // array for storing data
+        var array = []
+        // callback hell for scraping in sequence
+        scrapeLiveLove("https://www.livelovepolish.com", "/collections/best-sellers", function (data) {
+            array.push(data)
+            scrapeLiveLove("https://www.livelovepolish.com", "/collections/whats-new", function (data) {
+                array.push(data)
+                // scrape from emily de molly
+                scrapeEmilyDeMolly("https://emily-de-molly.myshopify.com", "/collections/new-release", function (data) {
+                    array.push(data)
+                    scrapeEmilyDeMolly("https://emily-de-molly.myshopify.com", "/collections/best-sellers", function (data) {
+                        array.push(data)
+                        res.json(array);
+                    });
+                });
             });
-
-            // Send a message to the client
-            res.json(polishes)
         });
+    });
+}
+
+function scrapeLiveLove(root, path, cb) {
+    var url = root + path;
+    axios.get(url).then(function (response) {
+
+
+        // Load the HTML into cheerio and save it to a variable
+        var $ = cheerio.load(response.data);
+
+        // An empty array to save the data that we'll scrape
+        var polishes = [];
+
+        // get them alllllllllllll
+        $("div.product-container").each(function (i, element) {
+            var name = $(element).find("h3.product-name").children().text();
+            var price = $(element).find("div.product-price").children().children().text();
+            var link = $(element).find("div.product-thumbnail").children("a").eq(1).attr("href");
+            var img = $(element).find(".product-featured-image").attr("src");
+            // push result into polishes as an object
+            var polish = {
+                name: name,
+                price: price,
+                link: root + link,
+                img: img
+            };
+
+            // attempt to find
+            db.Polish.findOne(polish, function(err, data) {
+                if (data) {
+                    // update information
+                    db.Polish.update(polish, {$set: polish})
+                    console.log("polish updated")
+                } else {
+                    // insert into database if not found
+                    db.Polish.create(polish);
+                    console.log("polish created")
+                }
+            })
+
+            // push polish into polishes array for response data
+            polishes.push(polish);
+        });
+
+        // return callback
+        return cb(polishes);
+    });
+}
+
+function scrapeEmilyDeMolly(root, path, cb) {
+    var url = root + path;
+    axios.get(url).then(function (response) {
+
+        // Load the HTML into cheerio and save it to a variable
+        var $ = cheerio.load(response.data);
+
+        // An empty array to save the data that we'll scrape
+        var polishes = [];
+
+        // get them alllllllllllll
+        $("div.product-grid").children("div.grid-item").each(function (i, element) {
+            var name = $(element).children().children("p").children("span").text();
+            var price = $(element).children().children("p").text().trim();
+            // trim the price from the nasty string
+            price = price.slice(price.length - 7, price.length);
+            price = price.replace(/ +/g, "");
+            price = price.replace(/\n/g, "");
+            var link = $(element).children("a").attr("href");
+            var img = $(element).find("div.product-grid-image").children().children("img").attr("src");
+            // push result into polishes as an object
+            var polish = {
+                name: name,
+                price: price,
+                link: root + link,
+                img: img
+            };
+
+            // attempt to find
+            db.Polish.findOne(polish, function (err, data) {
+                if (data) {
+                    db.Polish.update(polish, {$set: polish})
+                    console.log("polish updated")
+                } else {
+                    // insert into database if not found
+                    db.Polish.create(polish);
+                    console.log("polish created")
+                }
+            })
+
+            // push polish into polishes array for response data
+            polishes.push(polish);
+        });
+
+        // return callback
+        return cb(polishes);
     });
 }

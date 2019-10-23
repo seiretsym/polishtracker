@@ -1,12 +1,13 @@
 // do something when wish button is clicked
 $(document).on("click", "button.wish", function(event) {
     event.preventDefault();
-
+    console.log("wish button clicked")
     // open wish window
-    var gossip = "#wish[data-id='" + $(this).data("id") + "']";
+    var gossip = "div.wishcard[data-id='" + $(this).data("id") + "']";
     $(gossip).removeClass("d-none")
     $(gossip).animate({
         height: 466,
+        width: 355
     })
 })
 
@@ -15,11 +16,12 @@ $(document).on("click", "button.x", function(event) {
     event.preventDefault();
 
     // define wish window
-    var gossip = "#wish[data-id='" + $(this).data("id") + "']";
+    var gossip = "div.wishcard[data-id='" + $(this).data("id") + "']";
 
     // make it disappear
     $(gossip).animate({
-        height: 0
+        height: 0,
+        width: 0
     }, function() {
         $(gossip).addClass("d-none")
     })

@@ -15,14 +15,13 @@ body {
   filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
 }
 
-#wish {
+.wishcard {
   position: absolute;
   background-color: rgba(0, 52, 99, 0.8);
   filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
-  bottom: 61px;
   height: 0px;
   margin: 15px 7.5px 0px 7.5px;
-  width: 355px;
+  width: 0px;
 }
 
 .top-middle {
@@ -69,10 +68,6 @@ body {
     background-color: rgba(0, 52, 99, 0.8);
     right: 0px;
     bottom: 0px;
-}
-
-#wish {
-  width: 255px;
 }
 
 .card,
