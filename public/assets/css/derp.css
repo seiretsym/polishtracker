@@ -46,7 +46,9 @@ body {
 .text-nebulous {
   color: #06bbdd;
 }
-
+input.wish {
+  width: 255px;
+}
 .btn-nebulous:hover {
   color: #bd67c4;
 }

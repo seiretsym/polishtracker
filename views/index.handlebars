@@ -3,7 +3,7 @@
     {{!-- JUMBODERP --}}
     <div class="jumbotron mb-3 mt-3 text-center p-3">
         <h1 class="display-4 text-nebulous">Sparkles</h1>
-        <h5 class="display-5 text-center text-nebulous">...because your nails deserve it</h5>
+        <h5 class="display-5 text-center text-nebulous">...because your nails deserve to be fabulous!</h5>
     </div>
 
     {{!-- navbar --}}
@@ -17,18 +17,27 @@
         <li class="nav-item">
             <a id="signin" class="nav-link" href="#">Sign In</a>
             <div id="signin" class="rounded signin text-center d-none">
-                <button class="btn btn-fav close" data-id="signin"><h1>&times;</h1></button>
-                <input id="user-signin" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-3 w-75" type="username" placeholder="Username">
-                <input id="pw-signin" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-1 w-75" type="password" placeholder="Password">
+                <button class="btn btn-fav close" data-id="signin">
+                    <h1>&times;</h1>
+                </button>
+                <input id="user-signin" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-3 w-75" type="username"
+                    placeholder="Username">
+                <input id="pw-signin" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-1 w-75" type="password"
+                    placeholder="Password">
                 <hr>
                 <button id="signin" class="btn btn-nebulous border-0 text-nebulous mt-1 w-75">Sign In</button>
                 <button id="signup" class="btn btn-nebulous border-0 text-nebulous mt-1 w-75">Sign Up</button>
             </div>
             <div id="signup" class="rounded signin text-center d-none">
-                <button class="btn btn-fav close" data-id="signup"><h1>&times;</h1></button>
-                <input id="user-register" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-3 w-75" type="username" placeholder="Username">
-                <input id="pw-register" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-1 w-75" type="password" placeholder="Password">
-                <input id="pw-confirm" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-1 w-75" type="password" placeholder="Confirm Password">
+                <button class="btn btn-fav close" data-id="signup">
+                    <h1>&times;</h1>
+                </button>
+                <input id="user-register" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-3 w-75"
+                    type="username" placeholder="Username">
+                <input id="pw-register" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-1 w-75" type="password"
+                    placeholder="Password">
+                <input id="pw-confirm" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-1 w-75" type="password"
+                    placeholder="Confirm Password">
                 <hr>
                 <button id="register" class="btn btn-nebulous border-0 mt-2 text-nebulous w-75">Register</button>
             </div>
@@ -37,22 +46,35 @@
             <a id="signout" class="nav-link" href="#">Sign Out</a>
         </li>
     </ul>
+    <ul class="nav">
+        <li class="nav-item ml-3 disabled">
+            <a href="#" class="nav-link disabled text-fabulous"><strong>Sort By : </strong></a>
+        </li>
+        <li class="nav-item">
+            <a href="/price" class="nav-link">Price</a>
+        </li>
+        <li class="nav-item">
+            <a href="/name" class="nav-link">Name</a>
+        </li>
+        <li class="nav-item ml-auto">
+            <a id="scrape" class="nav-link" href="#">Update Database</a>
+        </li>
+    </ul>
 
     {{!-- content --}}
     <div class="content d-flex flex-wrap">
         {{#each polish}}
         <div class="card-wrap d-flex d-block">
             <div class="card card-polish p-3">
-                <div class="card-title m-0">
+                <div class="card-title m-0 mb-auto">
                     <div class="position-absolute text-light">
                         <button class="btn btn-fav">
                             <h1>★</h1>
                         </button>
                     </div>
-                    <img src="{{img}}"
-                        class="nebulous-img">
+                    <img src="{{img}}" class="nebulous-img">
                 </div>
-                <div class="card-body mt-3 p-0 text-center text-nebulous">
+                <div class="card-text mt-3 mb-0 p-0 text-center text-nebulous">
                     <a href="{{link}}">
                         <h5>{{name}}
                     </a>
@@ -64,7 +86,9 @@
             <div class="card text-nebulous p-3 d-none wishcard" data-id="{{_id}}">
                 <div class="card-title m-0 text-center">
                     <h4>Upon The Stars</h4>
-                    <button class="btn btn-fav top-middle x" data-id="{{_id}}"><h1>&times;</h1></button>
+                    <button class="btn btn-fav top-middle x" data-id="{{_id}}">
+                        <h1>&times;</h1>
+                    </button>
                 </div>
                 <div class="card-body overflow-auto">
                     <ul class="list-group">

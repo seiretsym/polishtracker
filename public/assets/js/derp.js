@@ -11,6 +11,18 @@ $(document).on("click", "button.wish", function(event) {
     })
 })
 
+// do something when update link is clicked
+$(document).on("click", "#scrape", function(event) {
+    event.preventDefault();
+
+    // ajax get scrape route
+    $.ajax({
+        url: "/scrape",
+        type: "GET"
+    }).then(function(data) {
+        location.reload();
+    })
+})
 // do something with x button in wish window is clicked
 $(document).on("click", "button.x", function(event) {
     event.preventDefault();
