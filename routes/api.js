@@ -17,6 +17,11 @@ module.exports = function (app) {
         })
     })
 
+    // favorites page
+    app.get("/", function (req, res) {
+        
+    })
+
     // sign in
     app.put("/user/signin", function (req, res) {
         db.User.find(req.body, function (err, data) {
@@ -38,6 +43,33 @@ module.exports = function (app) {
             }
         })
     })
+
+    // add a polish to favorites
+    app.post("/favorite", function (req, res) {
+        console.log(req.body);
+        var queryData = {
+            _id: req.body.userId,
+            savedPolishes: req.body.polishId,
+        }
+        db.User.findOne(queryData, function (err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (data) {
+                    console.log("found")
+                } else {
+                    // push to user if found
+                    db.User.update({ _id: req.body.userId }, { $push: { savedPolishes: req.body.polishId } }, { new: true }, function (err, data) {
+                        if (err) {
+                            console.log(err)
+                        } else {
+                            res.json(data);
+                        }
+                    })
+                }
+            }
+        })
+    });
 
     // scrape route
     app.get("/scrape", function (req, res) {

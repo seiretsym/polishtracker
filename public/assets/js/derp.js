@@ -61,7 +61,6 @@ $(document).on("click", "button#signin", function (event) {
 
     // if username and password inputs aren't empty
     if (user || pass) {
-        console.log(user);
         // initiate sign in
         $.ajax({
             url: "user/signin",
@@ -199,6 +198,7 @@ $(document).on("click", "#signout", function (event) {
     $("a.send").addClass("disabled");
     $("a#signin").removeClass("d-none");
     $("a#signout").addClass("d-none");
+    $("button.favorite").addClass("d-none");
 })
 
 // do something when send button is clicked
@@ -208,18 +208,36 @@ $(document).on("click", "a.send", function (event) {
     console.log("send button clicked");
 })
 
+// do something when favorite button is clicked
+$(document).on("click", "button.favorite", function(event) {
+    event.preventDefault();
+
+    // make post request to server
+    $.ajax({
+        url: "/favorite",
+        type: "POST",
+        data: {
+            userId: userId,
+            polishId: $(this).data("id"),
+        }
+    }).then(function(data) {
+        console.log(data);
+    })
+})
+
 var username = "";
 var userId = "";
 
 // do some fancy stuff after signing in
 function signedIn(data) {
     // set global username
-    username = data.username;
-    userId = data._id;
+    username = data[0].username;
+    userId = data[0]._id;
 
     // enable disabled elements
     $("a.saved").removeClass("disabled");
     $("a.send").removeClass("disabled");
     $("a#signin").addClass("d-none");
     $("a#signout").removeClass("d-none");
+    $("button.favorite").removeClass("d-none");
 }
