@@ -5,22 +5,40 @@
         <h1 class="display-4 text-nebulous">Sparkles</h1>
         <h5 class="display-5 text-center text-nebulous">...because your nails deserve it</h5>
     </div>
+
+    {{!-- navbar --}}
     <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                Active
-            </a>
+        <li class="nav-item ml-3">
+            <a id="viewall" class="nav-link" href="#">View All Collections</a>
+        </li>
+        <li class="nav-item mr-auto">
+            <a id="viewsaved" class="nav-link" href="#">Your Saved Collection</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a id="signin" class="nav-link" href="#">Sign In</a>
+            <div id="signin" class="rounded signin text-center d-none">
+                <button class="btn btn-fav close" data-id="signin"><h1>&times;</h1></button>
+                <input id="user-signin" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-3 w-75" type="username" placeholder="Username">
+                <input id="pw-signin" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-1 w-75" type="password" placeholder="Password">
+                <hr>
+                <button id="signin" class="btn btn-nebulous border-0 text-nebulous mt-1 w-75">Sign In</button>
+                <button id="signup" class="btn btn-nebulous border-0 text-nebulous mt-1 w-75">Sign Up</button>
+            </div>
+            <div id="signup" class="rounded signin text-center d-none">
+                <button class="btn btn-fav close" data-id="signup"><h1>&times;</h1></button>
+                <input id="user-register" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-3 w-75" type="username" placeholder="Username">
+                <input id="pw-register" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-1 w-75" type="password" placeholder="Password">
+                <input id="pw-confirm" class="btn-nebulous border-0 text-nebulous pl-3 mx-3 mt-1 w-75" type="password" placeholder="Confirm Password">
+                <hr>
+                <button id="register" class="btn btn-nebulous border-0 mt-2 text-nebulous w-75">Register</button>
+            </div>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <li class="nav-item d-none">
+            <a id="signout" class="nav-link" href="#">Sign Out</a>
         </li>
     </ul>
+
+    {{!-- content --}}
     <div class="content d-flex flex-wrap">
         {{#each polish}}
         <div class="card-wrap d-flex">
@@ -40,39 +58,30 @@
                     </a>
                     <span class="ml-auto">({{price}})</span></h5>
                     <hr>
-                    <button class="btn btn-nebulous text-nebulous w-100 gossip" data-id="123">Make a Wish</button>
+                    <button class="btn btn-nebulous text-nebulous w-100 wish" data-id="{{_id}}">Make a Wish</button>
                 </div>
             </div>
-            <div id="gossip" class="card text-nebulous p-3 d-none" data-id="123">
+            <div id="wish" class="card text-nebulous p-3 d-none" data-id="{{_id}}">
                 <div class="card-title m-0 text-center">
                     <h4>Upon The Stars</h4>
-                    <button class="btn btn-fav top-middle x" data-id="123"><h1>&times;</h1></button>
+                    <button class="btn btn-fav top-middle x" data-id="{{_id}}"><h1>&times;</h1></button>
                 </div>
                 <div class="card-body overflow-auto">
                     <ul class="list-group">
+                        {{#each wish}}
                         <li class="list-group-item">
-                            <strong class="text-fabulous">Username:</strong>
-                            <span>This polish is fabulous! I LOVE IT!</span>
+                            <strong class="text-fabulous">{{username}}</strong>
+                            <span>{{message}}</span>
                         </li>
-                        <li class="list-group-item">Dapibus ac facilisis in Dapibus ac facilisis in Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
+                        {{/each}}
                     </ul>
                 </div>
                 <div class="pt-3 d-flex">
-                    <input id="wish" type="text" class="btn-nebulous border-0 text-nebulous pl-3 mr-3" data-id="">
+                    <input id="wish" type="text" class="btn-nebulous border-0 text-nebulous pl-3 mr-3" data-id="{{_id}}">
                     <button class="btn btn-nebulous text-nebulous">Send</button>
                 </div>
             </div>
         </div>
+        {{/each}}
     </div>
-    <div>
-
-    </div>
-
-
 </div>

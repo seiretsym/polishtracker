@@ -6,6 +6,6 @@ module.exports = function(app) {
 
     // main page
     app.get("/", function(req, res) {
-        res.render("index" {polish: "something"})
+        res.render("index", {polish: "something"})
     })
 }
