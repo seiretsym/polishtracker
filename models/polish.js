@@ -17,9 +17,13 @@ var PolishSchema = new Schema({
         type: String,
         required: true,
     },
-    note: {
+    img: {
+        type: String,
+        required: true,
+    },
+    wish: {
         type: Schema.Types.ObjectId,
-        ref: "Note"
+        ref: "Wish"
     }
 })
 

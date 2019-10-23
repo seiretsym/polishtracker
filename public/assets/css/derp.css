@@ -1,18 +1,154 @@
 body {
     background-image: url("https://wallpaperaccess.com/full/39632.jpg");
-    background-size: cover;
     background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
     background-color: #000000;
 }
 
-.jumbotron {
-    background-color: rgba(120, 60, 170, 0.5);
+.jumbotron,
+.card,
+.nav {
+    background-color: rgba(0,52,99, 0.5);
+    border-color: #000000;
+    filter: drop-shadow(0px 0px 10px rgb(8, 67, 126))
 }
 
+#gossip {
+    position: absolute;
+    background-color: rgba(0,52,99, 0.8);
+    filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
+    bottom: 61px;
+    height: 0px;
+    margin: 15px 7.5px 0px 7.5px;
+    width: 355px;
+}
+
+.top-middle {
+    position: absolute;
+    right: 0px;
+    top: -5px;
+}
 .text-fabulous {
-    color: #FF00FF !important;
+    color: #bd67c4 !important;
+}
+
+.jumbotron,
+.nav {
+    margin: 0px 7.5px;
+}
+
+.card-polish {
+    width: 355px;
+    margin: 15px 7.5px 0px 7.5px;
+}
+
+.text-nebulous {
+    color: #06bbdd
+}
+
+.btn-nebulous:hover {
+    color: #bd67c4
+}
+
+.btn-nebulous {
+    background-color: rgba(2,19,37, 0.5);
+
+}
+
+#wish {
+    width: 255px;
 }
 
 * {
     border-radius: 20px !important;
+}
+
+.btn-fav {
+    color: #FF9977;
+    text-shadow: 0 0 5px #000000, 0 0 10px #DDAA00;
+}
+
+.btn:hover {
+    color: #FFCC33;
+    animation: sparkle 1s infinite;
+    -webkit-animation: sparkle 1s infinite;
+}
+
+@-webkit-keyframes sparkle {
+    0% {
+        text-shadow: 0 0 5px #DDAA00, 0 0 10px #000000;
+    }
+    50% {
+        text-shadow: 0 0 10px #FFFFFF, 0 0 20px #DDAA00;
+    }
+    100% {
+        text-shadow: 0 0 5px #DDAA00, 0 0 10px #000000;
+    }
+}
+
+@keyframes sparkle {
+    0% {
+        text-shadow: 0 0 5px #DDAA00, 0 0 10px #000000;
+    }
+    50% {
+        text-shadow: 0 0 10px #FFFFFF, 0 0 20px #DDAA00;
+    }
+    100% {
+        text-shadow: 0 0 5px #DDAA00, 0 0 10px #000000;
+    }
+}
+
+.nebulous-img {
+    width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .card {
+        margin: 0 auto;
+    }
+}
+
+a {
+    color: #06bbdd;
+}
+
+a:hover {
+    color: #bd67c4;
+    text-decoration: none;
+    animation: sparkle 1s infinite;
+}
+
+.btn:focus,
+.btn:active,
+textarea,
+input {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.list-group-item {
+    background-color: rgba(2,19,37, 0.5);
+    margin-bottom: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #06bbdd; 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #06bbdd; 
 }

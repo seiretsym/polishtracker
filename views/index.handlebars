@@ -2,7 +2,77 @@
 <div class="container">
     {{!-- JUMBODERP --}}
     <div class="jumbotron mb-3 mt-3 text-center p-3">
-        <h1 class="display-4 text-fabulous">Polish Tracker</h1>
-        <h5 class="display-5 text-center text-fabulous">To help you stay fabulous</h5>
+        <h1 class="display-4 text-nebulous">Sparkles</h1>
+        <h5 class="display-5 text-center text-nebulous">...because your nails deserve it</h5>
     </div>
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                Active
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+    </ul>
+    <div class="content d-flex flex-wrap">
+        {{#each polish}}
+        <div class="card-wrap d-flex">
+            <div class="card card-polish p-3">
+                <div class="card-title m-0">
+                    <div class="position-absolute text-light">
+                        <button class="btn btn-fav">
+                            <h1>★</h1>
+                        </button>
+                    </div>
+                    <img src="https://cdn.shopify.com/s/files/1/0600/2197/products/jane-austen-wisdom-or-wit-1_grande.jpg?v=1566245899"
+                        class="nebulous-img">
+                </div>
+                <div class="card-body mt-3 p-0 text-center text-nebulous">
+                    <a href="{{link}}">
+                        <h5>{{name}}
+                    </a>
+                    <span class="ml-auto">({{price}})</span></h5>
+                    <hr>
+                    <button class="btn btn-nebulous text-nebulous w-100 gossip" data-id="123">Make a Wish</button>
+                </div>
+            </div>
+            <div id="gossip" class="card text-nebulous p-3 d-none" data-id="123">
+                <div class="card-title m-0 text-center">
+                    <h4>Upon The Stars</h4>
+                    <button class="btn btn-fav top-middle x" data-id="123"><h1>&times;</h1></button>
+                </div>
+                <div class="card-body overflow-auto">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong class="text-fabulous">Username:</strong>
+                            <span>This polish is fabulous! I LOVE IT!</span>
+                        </li>
+                        <li class="list-group-item">Dapibus ac facilisis in Dapibus ac facilisis in Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Morbi leo risus</li>
+                        <li class="list-group-item">Porta ac consectetur ac</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                </div>
+                <div class="pt-3 d-flex">
+                    <input id="wish" type="text" class="btn-nebulous border-0 text-nebulous pl-3 mr-3" data-id="">
+                    <button class="btn btn-nebulous text-nebulous">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+
+    </div>
+
+
 </div>
