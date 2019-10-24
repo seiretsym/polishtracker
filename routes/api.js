@@ -270,8 +270,11 @@ function scrapeLiveLove(root, path, cb) {
                 .then(function (data) {
                     if (data) {
                         // update information
-                        console.log("'" + name + "'");
                         console.log("polish updated")
+                    } else {
+                        // create new polish
+                        db.Polish.create(polish);
+                        console.log("new polish added");
                     }
                 })
 
@@ -318,8 +321,11 @@ function scrapeEmilyDeMolly(root, path, cb) {
                 .then(function (data) {
                     if (data) {
                         // update information
-                        console.log("'" + name + "'");
                         console.log("polish updated")
+                    } else {
+                        // create new polish
+                        db.Polish.create(polish);
+                        console.log("new polish added");
                     }
                 })
 
