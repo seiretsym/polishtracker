@@ -90,18 +90,18 @@
                         <h1>&times;</h1>
                     </button>
                 </div>
-                <div class="card-body overflow-auto">
-                    <ul class="list-group">
+                <div class="card-body wishes overflow-auto" data-id="{{_id}}">
+                    <ul class="list-group wish-list" data-id="{{_id}}">
                         {{#each wish}}
-                        <li class="list-group-item text-nebulous rounded">
-                            <strong class="text-fabulous">{{username}}</strong>
+                        <li class="list-group-item text-nebulous rounded mb-3">
+                            <strong class="text-fabulous">{{username}}: </strong>
                             <span>{{message}}</span>
                         </li>
                         {{/each}}
                     </ul>
                 </div>
                 <div class="pt-3 d-flex">
-                    <input type="text" class="btn-nebulous border-0 text-nebulous pl-3 mr-3 wish">
+                    <input type="text" class="btn-nebulous border-0 text-nebulous pl-3 mr-3 wish" data-id="{{_id}}">
                     <a class="btn btn-nebulous text-nebulous send rounded disabled" data-id="{{_id}}">Wish</a>
                 </div>
             </div>

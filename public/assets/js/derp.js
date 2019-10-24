@@ -11,7 +11,7 @@ $(document).on("ready", function () {
     }
 
     // do something when sort by price link is clicked
-    $(document).on("click", "a#sort-price", function(event) {
+    $(document).on("click", "a#sort-price", function (event) {
         event.preventDefault();
         var path = window.location.pathname;
         var origin = window.location.origin;
@@ -26,7 +26,7 @@ $(document).on("ready", function () {
     })
 
     // do something when sort by name link is clicked
-    $(document).on("click", "a#sort-name", function(event) {
+    $(document).on("click", "a#sort-name", function (event) {
         event.preventDefault();
         var path = window.location.pathname;
         var origin = window.location.origin;
@@ -43,13 +43,19 @@ $(document).on("ready", function () {
     // do something when wish button is clicked
     $(document).on("click", "a.wish", function (event) {
         event.preventDefault();
+        var id = $(this).data("id");
         // open wish window
-        var gossip = "div.wishcard[data-id='" + $(this).data("id") + "']";
+        var gossip = "div.wishcard[data-id='" + id + "']";
         $(gossip).removeClass("d-none")
         $(gossip).animate({
             height: 466,
-            width: 355
+            width: 355,
         })
+        setTimeout(function() {
+            $("div.wishes[data-id='" + id + "']").animate({
+                scrollTop: $("div.wishes[data-id='" + id + "']").get(0).scrollHeight
+            })
+        }, 450)
     })
 
     // do something when update link is clicked
@@ -255,9 +261,8 @@ $(document).on("ready", function () {
     // do something when send button is clicked
     $(document).on("click", "a.send", function (event) {
         event.preventDefault();
-
-        var message = $("input.wish").val().trim();
-
+        var id = $(this).data("id");
+        var message = $("input.wish[data-id='"+id+"']").val().trim();
         // text validation
         if (message) {
             // create data object
@@ -267,14 +272,14 @@ $(document).on("ready", function () {
             }
             // send the wish to the stars!
             $.ajax({
-                url: "../../wish/" + $(this).data("id"),
+                url: "../../wish/" + id,
                 type: "POST",
                 data: data
             }).then(function(data) {
                 if (data) {
-                    console.log(data)
                     $("input.wish").attr("placeholder", "")
                     $("input.wish").val("")
+                    repopWishes(id)
                 }
             })
         } else {
@@ -335,4 +340,27 @@ function signedIn(data) {
 
 function favPop() {
     $(".favorite-popup").removeClass("d-none").addClass("d-flex");
+}
+
+function repopWishes(polishId) {
+    var wishlist = "ul.wish-list[data-id='" + polishId + "']";
+    $.ajax({
+        url: "/polish/" + polishId,
+        type: "GET"
+    }).then(function (data) {
+        console.log(data.wish);
+        $(wishlist).empty();
+
+        data.wish.map(function (wish) {
+            var li = $("<li>").addClass("list-group-item text-nebulous rounded mb-3");
+            li.append(
+                $("<strong>").addClass("text-fabulous").html(wish.username + ": "),
+                $("<span>").html(wish.message),
+            )
+            $(wishlist).append(li);
+            $("div.wishes[data-id='" + polishId + "']").animate({
+                scrollTop: $("div.wishes[data-id='" + polishId + "']").get(0).scrollHeight
+            })
+        })
+    })
 }

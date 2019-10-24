@@ -18,6 +18,16 @@ module.exports = function (app) {
             })
     })
 
+    // get polish by id
+    app.get("/polish/:id", function(req, res) {
+        db.Polish.find({_id: req.params.id}).populate("wish")
+            .then(function(data) {
+                res.json(data[0]);
+            }).catch(function(err) {
+                console.log(err)
+            })
+    })
+
     // favorites page
     app.get("/favorite/:id", function (req, res) {
         db.User.find({ _id: req.params.id }).populate({
