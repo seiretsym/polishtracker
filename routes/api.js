@@ -11,7 +11,6 @@ module.exports = function (app) {
     app.get("/", function (req, res) {
         db.Polish.find({}).populate("wish")
             .then(function (data) {
-                console.log(data)
                 res.render("index", { polish: data })
             }).catch(function (err) {
                 console.log(err)
@@ -19,11 +18,11 @@ module.exports = function (app) {
     })
 
     // get polish by id
-    app.get("/polish/:id", function(req, res) {
-        db.Polish.find({_id: req.params.id}).populate("wish")
-            .then(function(data) {
+    app.get("/polish/:id", function (req, res) {
+        db.Polish.find({ _id: req.params.id }).populate("wish")
+            .then(function (data) {
                 res.json(data[0]);
-            }).catch(function(err) {
+            }).catch(function (err) {
                 console.log(err)
             })
     })
@@ -36,7 +35,6 @@ module.exports = function (app) {
                 path: "wish"
             }
         }).then(function (data) {
-            console.log(data);
             if (data) {
                 if (data[0].polishes) {
                     res.render("favorites", { polish: data[0].polishes })
@@ -52,9 +50,9 @@ module.exports = function (app) {
     })
 
     // remove polish from favorites
-    app.delete("/favorite", function(req, res) {
-        db.User.findOneAndUpdate({_id: req.body.userId}, {$pull: {polishes: req.body.polishId}})
-            .then(function(data) {
+    app.delete("/favorite", function (req, res) {
+        db.User.findOneAndUpdate({ _id: req.body.userId }, { $pull: { polishes: req.body.polishId } })
+            .then(function (data) {
                 res.json(data)
             })
     })
@@ -63,7 +61,6 @@ module.exports = function (app) {
     app.get("/name", function (req, res) {
         db.Polish.find({}).populate("wish").sort({ name: 1 })
             .then(function (data) {
-                console.log(data)
                 res.render("index", { polish: data })
             }).catch(function (err) {
                 console.log(err)
@@ -80,7 +77,6 @@ module.exports = function (app) {
                 sort: { name: 1 }
             }
         }).then(function (data) {
-            console.log(data);
             if (data) {
                 if (data[0].polishes) {
                     res.render("index", { polish: data[0].polishes })
@@ -99,7 +95,6 @@ module.exports = function (app) {
     app.get("/price", function (req, res) {
         db.Polish.find({}).populate("wish").sort({ price: 1 })
             .then(function (data) {
-                console.log(data)
                 res.render("index", { polish: data })
             }).catch(function (err) {
                 console.log(err)
@@ -116,7 +111,6 @@ module.exports = function (app) {
                 sort: { name: 1 }
             }
         }).then(function (data) {
-            console.log(data);
             if (data) {
                 if (data[0].polishes) {
                     res.render("index", { polish: data[0].polishes })
@@ -258,7 +252,7 @@ function scrapeLiveLove(root, path, cb) {
 
         // get them alllllllllllll
         $("div.product-container").each(function (i, element) {
-            var name = $(element).find("h3.product-name").children().text();
+            var name = $(element).find("h3.product-name").children().text().trim();
             var price = $(element).find("div.product-price").children().children().text();
             price = price.replace("$", "");
             var link = $(element).find("div.product-thumbnail").children("a").eq(1).attr("href");
@@ -271,18 +265,15 @@ function scrapeLiveLove(root, path, cb) {
                 img: img
             };
 
-            // attempt to find
-            db.Polish.findOne({name:polish.name}, function (err, data) {
-                if (data) {
-                    // update information
-                    db.Polish.update({name:polish.name}, { $set: polish })
-                    console.log("polish updated")
-                } else {
-                    // insert into database if not found
-                    db.Polish.create(polish);
-                    console.log("polish created")
-                }
-            })
+            // attempt to find then update/create
+            db.Polish.findOneAndUpdate({ name: polish.name }, { $set: polish }, { new: true })
+                .then(function (data) {
+                    if (data) {
+                        // update information
+                        console.log("'" + name + "'");
+                        console.log("polish updated")
+                    }
+                })
 
             // push polish into polishes array for response data
             polishes.push(polish);
@@ -305,14 +296,13 @@ function scrapeEmilyDeMolly(root, path, cb) {
 
         // get them alllllllllllll
         $("div.product-grid").children("div.grid-item").each(function (i, element) {
-            var name = $(element).children().children("p").children("span").text();
+            var name = $(element).children().children("p").children("span").text().trim();
             var price = $(element).children().children("p").text().trim();
             // trim the price from the nasty string
             price = price.slice(price.length - 7, price.length);
             price = price.replace(/ +/g, "");
             price = price.replace(/\n/g, "");
             price = price.replace("$", "");
-            console.log(price);
             var link = $(element).children("a").attr("href");
             var img = $(element).find("div.product-grid-image").children().children("img").attr("src");
             // push result into polishes as an object
@@ -323,17 +313,15 @@ function scrapeEmilyDeMolly(root, path, cb) {
                 img: img
             };
 
-            // attempt to find
-            db.Polish.findOne({name: polish}, function (err, data) {
-                if (data) {
-                    db.Polish.update({name: polish}, { $set: polish })
-                    console.log("polish updated")
-                } else {
-                    // insert into database if not found
-                    db.Polish.create(polish);
-                    console.log("polish created")
-                }
-            })
+            // attempt to find then update/create
+            db.Polish.findOneAndUpdate({ name: polish.name }, { $set: polish }, { new: true })
+                .then(function (data) {
+                    if (data) {
+                        // update information
+                        console.log("'" + name + "'");
+                        console.log("polish updated")
+                    }
+                })
 
             // push polish into polishes array for response data
             polishes.push(polish);
