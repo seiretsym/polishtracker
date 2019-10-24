@@ -1,4 +1,4 @@
-# `Sparkles ...because your nails deserve to be fabulous!`
+# Sparkles ...because your nails deserve to be fabulous!
 
 **`Technologies Used:`** MongoDB, Handlebars, Axios, BCrypt, Cheerio, Heroku, Node.js, Express.js, Bootstrap, jQuery, Javascript
 
@@ -109,9 +109,9 @@ bcrypt.hash(req.body.password, 10, function (err, hash) {
     })
 })
 ```
-## Links
+## `Links`
 LinkedIn: https://www.linkedin.com/in/kerwinhy/<br>
 GitHub: https://github.com/seiretsym<br>
 
-## Deployed Site:
+## `Deployed Site:`
 Heroku: https://manisparkles.herokuapp.com/
