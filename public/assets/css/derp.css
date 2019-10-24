@@ -89,7 +89,8 @@ input.wish {
 .jumbotron,
 .nav,
 input,
-button {
+button
+img {
   border-radius: 20px !important;
 }
 
@@ -98,7 +99,7 @@ button {
 }
 
 .rounded {
-    border-radius: 20px !important;
+  border-radius: 20px !important;
 }
 
 .btn-fav {
