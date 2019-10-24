@@ -39,15 +39,23 @@ module.exports = function (app) {
             console.log(data);
             if (data) {
                 if (data[0].polishes) {
-                    res.render("index", { polish: data[0].polishes })
+                    res.render("favorites", { polish: data[0].polishes })
                 } else {
-                    res.render("index")
+                    res.render("favorites")
                 }
             }
         })
             .catch(function (err) {
                 console.log(err)
                 res.send(404).end();
+            })
+    })
+
+    // remove polish from favorites
+    app.delete("/favorite", function(req, res) {
+        db.User.findOneAndUpdate({_id: req.body.userId}, {$pull: {polishes: req.body.polishId}})
+            .then(function(data) {
+                res.json(data)
             })
     })
 

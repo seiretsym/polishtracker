@@ -256,6 +256,7 @@ $(document).on("ready", function () {
         $("a#signin").removeClass("d-none");
         $("a#signout").addClass("d-none");
         $("button.favorite").addClass("d-none");
+        $("button.delete-favorite").addClass("d-none");
     })
 
     // do something when send button is clicked
@@ -308,6 +309,23 @@ $(document).on("ready", function () {
         })
     })
 
+        // do something when delete favorite button is clicked
+        $(document).on("click", "button.delete-favorite", function (event) {
+            event.preventDefault();
+    
+            // make post request to server
+            $.ajax({
+                url: "../../favorite",
+                type: "DELETE",
+                data: {
+                    userId: userId,
+                    polishId: $(this).data("id"),
+                }
+            }).then(function (data) {
+                location.reload();
+            })
+        })
+
     // do something with view favorites link is clicked
     $(document).on("click", "a.saved", function (event) {
         event.preventDefault();
@@ -336,6 +354,7 @@ function signedIn(data) {
     $("a#signin").addClass("d-none");
     $("a#signout").removeClass("d-none");
     $("button.favorite").removeClass("d-none");
+    $("button.delete-favorite").removeClass("d-none");
 }
 
 function favPop() {
