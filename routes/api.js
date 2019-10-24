@@ -272,10 +272,10 @@ function scrapeLiveLove(root, path, cb) {
             };
 
             // attempt to find
-            db.Polish.findOne(polish, function (err, data) {
+            db.Polish.findOne({name:polish}, function (err, data) {
                 if (data) {
                     // update information
-                    db.Polish.update(polish, { $set: polish })
+                    db.Polish.update({name:polish.name}, { $set: polish })
                     console.log("polish updated")
                 } else {
                     // insert into database if not found
@@ -324,9 +324,9 @@ function scrapeEmilyDeMolly(root, path, cb) {
             };
 
             // attempt to find
-            db.Polish.findOne(polish, function (err, data) {
+            db.Polish.findOne({name: polish}, function (err, data) {
                 if (data) {
-                    db.Polish.update(polish, { $set: polish })
+                    db.Polish.update({name: polish}, { $set: polish })
                     console.log("polish updated")
                 } else {
                     // insert into database if not found
