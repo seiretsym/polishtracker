@@ -141,6 +141,27 @@ button {
   border-radius: 20px !important;
 }
 
+@media only screen and (max-width: 1200px) {
+  .card-polish {
+    width: 295px;
+    margin: 15px 7.5px 0px 7.5px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .card-polish {
+    width: 330px;
+    margin: 15px 7.5px 0px 7.5px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .card-polish {
+    width: 238px;
+    margin: 15px 7.5px 0px 7.5px;
+  }
+}
+
 a {
   color: #06bbdd;
 }
