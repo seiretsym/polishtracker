@@ -1,5 +1,5 @@
 module.exports = {
-    Polish: require("./Polish"),
-    User: require("./User"),
-    Wish: require("./Wish")
+    Polish: require("./polish"),
+    User: require("./user"),
+    Wish: require("./wish")
 }
