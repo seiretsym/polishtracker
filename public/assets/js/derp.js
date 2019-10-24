@@ -10,6 +10,36 @@ $(document).on("ready", function () {
         })
     }
 
+    // do something when sort by price link is clicked
+    $(document).on("click", "a#sort-price", function(event) {
+        event.preventDefault();
+        var path = window.location.pathname;
+        var origin = window.location.origin;
+        var url = origin + path;
+        url = url.replace("price/", "")
+        url = url.replace("name/", "")
+        url += "price/"
+        console.log(path);
+        console.log(url)
+        // redirect
+        location.replace(url)
+    })
+
+    // do something when sort by name link is clicked
+    $(document).on("click", "a#sort-name", function(event) {
+        event.preventDefault();
+        var path = window.location.pathname;
+        var origin = window.location.origin;
+        var url = origin + path;
+        url = url.replace("price/", "")
+        url = url.replace("name/", "")
+        url += "name/"
+        console.log(path);
+        console.log(url)
+        // redirect
+        location.replace(url)
+    })
+
     // do something when wish button is clicked
     $(document).on("click", "a.wish", function (event) {
         event.preventDefault();
@@ -277,7 +307,7 @@ $(document).on("ready", function () {
     $(document).on("click", "a.saved", function (event) {
         event.preventDefault();
 
-        location.replace("/favorite/" + userId)
+        location.replace("/favorite/" + userId + "/")
     })
 
     // close favorite popup

@@ -51,10 +51,10 @@
             <a href="#" class="nav-link disabled text-fabulous"><strong>Sort By : </strong></a>
         </li>
         <li class="nav-item">
-            <a href="price" class="nav-link">Price</a>
+            <a id="sort-price" href="#" class="nav-link">Price</a>
         </li>
         <li class="nav-item">
-            <a href="name" class="nav-link">Name</a>
+            <a id="sort-name" href="#" class="nav-link">Name</a>
         </li>
         <li class="nav-item ml-auto">
             <a id="scrape" class="nav-link" href="#">Update Database</a>
@@ -76,9 +76,9 @@
                 </div>
                 <div class="card-text mt-3 mb-0 p-0 text-center text-nebulous">
                     <a href="{{link}}">
-                        <h5>{{name}}
+                        <strong>{{name}}
                     </a>
-                    <span class="ml-auto">({{price}})</span></h5>
+                    <span class="ml-auto">(${{price}})</span></strong>
                     <hr>
                     <a class="btn btn-nebulous text-nebulous w-100 wish rounded" data-id="{{_id}}">Make a Wish</a>
                 </div>

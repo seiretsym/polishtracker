@@ -20,21 +20,93 @@ module.exports = function (app) {
 
     // favorites page
     app.get("/favorite/:id", function (req, res) {
-        db.User.find({}).populate({
+        db.User.find({ _id: req.params.id }).populate({
             path: "polishes",
             populate: {
                 path: "wish"
             }
         }).then(function (data) {
-                console.log(data);
-                if (data) {
-                    if (data[0].polishes) {
-                        res.render("index", { polish: data[0].polishes })
-                    } else {
-                        res.render("index")
-                    }
+            console.log(data);
+            if (data) {
+                if (data[0].polishes) {
+                    res.render("index", { polish: data[0].polishes })
+                } else {
+                    res.render("index")
                 }
+            }
+        })
+            .catch(function (err) {
+                console.log(err)
+                res.send(404).end();
             })
+    })
+
+    // sort by name
+    app.get("/name", function (req, res) {
+        db.Polish.find({}).populate("wish").sort({ name: 1 })
+            .then(function (data) {
+                console.log(data)
+                res.render("index", { polish: data })
+            }).catch(function (err) {
+                console.log(err)
+            })
+    })
+
+    app.get("/favorite/:id/name", function (req, res) {
+        db.User.find({ _id: req.params.id }).populate({
+            path: "polishes",
+            populate: {
+                path: "wish"
+            },
+            options: {
+                sort: { name: 1 }
+            }
+        }).then(function (data) {
+            console.log(data);
+            if (data) {
+                if (data[0].polishes) {
+                    res.render("index", { polish: data[0].polishes })
+                } else {
+                    res.render("index")
+                }
+            }
+        })
+            .catch(function (err) {
+                console.log(err)
+                res.send(404).end();
+            })
+    })
+
+    // sort by price
+    app.get("/price", function (req, res) {
+        db.Polish.find({}).populate("wish").sort({ price: 1 })
+            .then(function (data) {
+                console.log(data)
+                res.render("index", { polish: data })
+            }).catch(function (err) {
+                console.log(err)
+            })
+    })
+
+    app.get("/favorite/:id/price", function (req, res) {
+        db.User.find({}).populate({
+            path: "polishes",
+            populate: {
+                path: "wish"
+            },
+            options: {
+                sort: { name: 1 }
+            }
+        }).then(function (data) {
+            console.log(data);
+            if (data) {
+                if (data[0].polishes) {
+                    res.render("index", { polish: data[0].polishes })
+                } else {
+                    res.render("index")
+                }
+            }
+        })
             .catch(function (err) {
                 console.log(err)
                 res.send(404).end();
@@ -43,13 +115,13 @@ module.exports = function (app) {
 
     // sign in
     app.put("/user/signin", function (req, res) {
-        db.User.find({username: req.body.username}, function (err, data) {
+        db.User.find({ username: req.body.username }, function (err, data) {
             if (err) {
                 console.log(err);
             } else {
                 // use bcrypt to compare submitted password with hash
                 var hash = data[0].password;
-                bcrypt.compare(req.body.password, hash, function(err, conf) {
+                bcrypt.compare(req.body.password, hash, function (err, conf) {
                     if (err) throw err;
 
                     if (conf) {
@@ -72,7 +144,7 @@ module.exports = function (app) {
                     res.json(false)
                 } else {
                     // hash that password
-                    bcrypt.hash(req.body.password, 10, function(err, hash) {
+                    bcrypt.hash(req.body.password, 10, function (err, hash) {
                         // then create user with password set to hash
                         db.User.create({
                             username: req.body.username,
@@ -170,12 +242,13 @@ function scrapeLiveLove(root, path, cb) {
         $("div.product-container").each(function (i, element) {
             var name = $(element).find("h3.product-name").children().text();
             var price = $(element).find("div.product-price").children().children().text();
+            price = price.replace("$", "");
             var link = $(element).find("div.product-thumbnail").children("a").eq(1).attr("href");
             var img = $(element).find(".product-featured-image").attr("src");
             // push result into polishes as an object
             var polish = {
                 name: name,
-                price: price,
+                price: parseFloat(price).toFixed(2),
                 link: root + link,
                 img: img
             };
@@ -220,12 +293,14 @@ function scrapeEmilyDeMolly(root, path, cb) {
             price = price.slice(price.length - 7, price.length);
             price = price.replace(/ +/g, "");
             price = price.replace(/\n/g, "");
+            price = price.replace("$", "");
+            console.log(price);
             var link = $(element).children("a").attr("href");
             var img = $(element).find("div.product-grid-image").children().children("img").attr("src");
             // push result into polishes as an object
             var polish = {
                 name: name,
-                price: price,
+                price: parseFloat(price).toFixed(2),
                 link: root + link,
                 img: img
             };
