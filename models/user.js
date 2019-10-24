@@ -13,10 +13,10 @@ var UserSchema = new Schema({
         type: String,
         required: true,
     },
-    savedPolishes: {
+    polishes: [{
         type: Schema.Types.ObjectId,
         ref: "Polish"
-    }
+    }]
 })
 
 // create model

@@ -12,14 +12,29 @@ module.exports = function (app) {
             if (err) {
                 console.log(err)
             } else {
+                console.log(data)
                 res.render("index", { polish: data })
             }
         })
     })
 
     // favorites page
-    app.get("/", function (req, res) {
-        
+    app.get("/favorite/:id", function (req, res) {
+        db.User.find({}).populate("polishes")
+        .then(function(data) {
+            console.log(data);
+            if (data) {
+                if (data[0].polishes) {
+                    res.render("index", { polish: data[0].polishes })
+                } else {
+                    res.render("index")
+                }
+            }
+        })
+        .catch(function(err) {
+            console.log(err)
+            res.send(404).end();
+        }) 
     })
 
     // sign in
@@ -28,18 +43,29 @@ module.exports = function (app) {
             if (err) {
                 console.log(err);
             } else {
-                res.json(data);
+                res.json(data[0]);
             }
         })
     })
 
     // sign up
     app.post("/user/register", function (req, res) {
-        db.User.create(req.body, function (err, data) {
+        db.User.find(req.body, function (err, data) {
             if (err) {
                 console.log(err);
             } else {
-                res.json(data);
+                if (data.length > 0) {
+                    res.json(false)
+                } else {
+                    db.User.create(req.body, function (err, data) {
+                        if (err) {
+                            console.log(err)
+                        } else {
+                            res.json(data);
+                        }
+                    })
+                }
+                
             }
         })
     })
@@ -49,7 +75,7 @@ module.exports = function (app) {
         console.log(req.body);
         var queryData = {
             _id: req.body.userId,
-            savedPolishes: req.body.polishId,
+            polishes: req.body.polishId,
         }
         db.User.findOne(queryData, function (err, data) {
             if (err) {
@@ -59,7 +85,7 @@ module.exports = function (app) {
                     console.log("found")
                 } else {
                     // push to user if found
-                    db.User.update({ _id: req.body.userId }, { $push: { savedPolishes: req.body.polishId } }, { new: true }, function (err, data) {
+                    db.User.update({ _id: req.body.userId }, { $push: { polishes: req.body.polishId } }, { new: true }, function (err, data) {
                         if (err) {
                             console.log(err)
                         } else {
