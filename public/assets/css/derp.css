@@ -72,12 +72,29 @@ input.wish {
     bottom: 0px;
 }
 
+.favorite-popup {
+  position: fixed;
+  width: 280px;
+  background-color: rgba(0, 52, 99, 0.8);
+  filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid black;
+  bottom: middle;
+  left: calc(50% - 140px);
+  top: calc(50% - 40px);
+}
+
 .card,
 .jumbotron,
 .nav,
 input,
 button {
   border-radius: 20px !important;
+}
+
+.list-group-item {
+  background-color: rgba(0, 52, 99, 0.5);
 }
 
 .rounded {
@@ -145,11 +162,6 @@ textarea,
 input {
   outline: none !important;
   box-shadow: none !important;
-}
-
-.list-group-item {
-  background-color: rgba(2, 19, 37, 0.5);
-  margin-bottom: 10px;
 }
 
 ::-webkit-scrollbar {

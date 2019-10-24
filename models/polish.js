@@ -21,10 +21,10 @@ var PolishSchema = new Schema({
         type: String,
         required: true,
     },
-    wish: {
+    wish: [{
         type: Schema.Types.ObjectId,
         ref: "Wish"
-    }
+    }]
 })
 
 // create model

@@ -93,7 +93,7 @@
                 <div class="card-body overflow-auto">
                     <ul class="list-group">
                         {{#each wish}}
-                        <li class="list-group-item">
+                        <li class="list-group-item text-nebulous rounded">
                             <strong class="text-fabulous">{{username}}</strong>
                             <span>{{message}}</span>
                         </li>
@@ -101,11 +101,16 @@
                     </ul>
                 </div>
                 <div class="pt-3 d-flex">
-                    <input type="text" class="btn-nebulous border-0 text-nebulous pl-3 mr-3 wish" data-id="{{_id}}">
-                    <a class="btn btn-nebulous text-nebulous send rounded disabled">Wish</a>
+                    <input type="text" class="btn-nebulous border-0 text-nebulous pl-3 mr-3 wish">
+                    <a class="btn btn-nebulous text-nebulous send rounded disabled" data-id="{{_id}}">Wish</a>
                 </div>
             </div>
         </div>
         {{/each}}
+    </div>
+
+    <div class="favorite-popup d-none">
+        <h5 class="text-nebulous my-auto">Added to Favorites!</h5>
+        <button class="btn btn-nebulous text-nebulous ml-3 close-fav">Close</button>
     </div>
 </div>

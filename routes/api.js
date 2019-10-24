@@ -2,48 +2,62 @@
 var db = require("../models");
 var axios = require("axios");
 var cheerio = require("cheerio");
+var bcrypt = require("bcrypt");
 
 // export routes
 module.exports = function (app) {
 
     // main page
     app.get("/", function (req, res) {
-        db.Polish.find({}, function (err, data) {
-            if (err) {
-                console.log(err)
-            } else {
+        db.Polish.find({}).populate("wish")
+            .then(function (data) {
                 console.log(data)
                 res.render("index", { polish: data })
-            }
-        })
+            }).catch(function (err) {
+                console.log(err)
+            })
     })
 
     // favorites page
     app.get("/favorite/:id", function (req, res) {
-        db.User.find({}).populate("polishes")
-        .then(function(data) {
-            console.log(data);
-            if (data) {
-                if (data[0].polishes) {
-                    res.render("index", { polish: data[0].polishes })
-                } else {
-                    res.render("index")
-                }
+        db.User.find({}).populate({
+            path: "polishes",
+            populate: {
+                path: "wish"
             }
-        })
-        .catch(function(err) {
-            console.log(err)
-            res.send(404).end();
-        }) 
+        }).then(function (data) {
+                console.log(data);
+                if (data) {
+                    if (data[0].polishes) {
+                        res.render("index", { polish: data[0].polishes })
+                    } else {
+                        res.render("index")
+                    }
+                }
+            })
+            .catch(function (err) {
+                console.log(err)
+                res.send(404).end();
+            })
     })
 
     // sign in
     app.put("/user/signin", function (req, res) {
-        db.User.find(req.body, function (err, data) {
+        db.User.find({username: req.body.username}, function (err, data) {
             if (err) {
                 console.log(err);
             } else {
-                res.json(data[0]);
+                // use bcrypt to compare submitted password with hash
+                var hash = data[0].password;
+                bcrypt.compare(req.body.password, hash, function(err, conf) {
+                    if (err) throw err;
+
+                    if (conf) {
+                        res.json(data[0])
+                    } else {
+                        res.send(conf)
+                    }
+                })
             }
         })
     })
@@ -57,34 +71,43 @@ module.exports = function (app) {
                 if (data.length > 0) {
                     res.json(false)
                 } else {
-                    db.User.create(req.body, function (err, data) {
-                        if (err) {
-                            console.log(err)
-                        } else {
-                            res.json(data);
-                        }
+                    // hash that password
+                    bcrypt.hash(req.body.password, 10, function(err, hash) {
+                        // then create user with password set to hash
+                        db.User.create({
+                            username: req.body.username,
+                            password: hash
+                        }, function (err, data) {
+                            if (err) {
+                                console.log(err)
+                            } else {
+                                res.json(data);
+                            }
+                        })
                     })
                 }
-                
+
             }
         })
     })
 
     // add a polish to favorites
     app.post("/favorite", function (req, res) {
-        console.log(req.body);
+        // create query object
         var queryData = {
             _id: req.body.userId,
             polishes: req.body.polishId,
         }
+        // find user
         db.User.findOne(queryData, function (err, data) {
             if (err) {
                 console.log(err);
             } else {
                 if (data) {
                     console.log("found")
+                    res.json(data);
                 } else {
-                    // push to user if found
+                    // push to user if it's not already favorited
                     db.User.update({ _id: req.body.userId }, { $push: { polishes: req.body.polishId } }, { new: true }, function (err, data) {
                         if (err) {
                             console.log(err)
@@ -96,6 +119,18 @@ module.exports = function (app) {
             }
         })
     });
+
+    // make a wish
+    app.post("/wish/:id", function (req, res) {
+        db.Wish.create(req.body).then(function (wish) {
+            return db.Polish.findOneAndUpdate({ _id: req.params.id }, { $push: { wish: wish._id } }, { new: true })
+        }).then(function (wished) {
+            res.json(wished)
+        }).catch(function (err) {
+            console.log(err);
+            res.send(false);
+        });
+    })
 
     // scrape route
     app.get("/scrape", function (req, res) {

@@ -5,6 +5,10 @@ var Schema = mongoose.Schema
 
 // create schema
 var NoteSchema = new Schema({
+    username: {
+        type: String,
+        required: true
+    },
     message: {
         type: String,
         required: true
