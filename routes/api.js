@@ -131,17 +131,23 @@ module.exports = function (app) {
             if (err) {
                 console.log(err);
             } else {
-                // use bcrypt to compare submitted password with hash
-                var hash = data[0].password;
-                bcrypt.compare(req.body.password, hash, function (err, conf) {
-                    if (err) throw err;
+                console.log(data);
+                if (data[0]) {
+                    // use bcrypt to compare submitted password with hash
+                    var hash = data[0].password;
+                    bcrypt.compare(req.body.password, hash, function (err, conf) {
+                        if (err) throw err;
 
-                    if (conf) {
-                        res.json(data[0])
-                    } else {
-                        res.send(conf)
-                    }
-                })
+                        if (conf) {
+                            res.json(data[0])
+                        } else {
+                            res.send(conf)
+                        }
+                    })
+                } else {
+                    console.log("User not found");
+                    res.send("Invalid Username");
+                }
             }
         })
     })

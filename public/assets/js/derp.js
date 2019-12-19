@@ -51,7 +51,7 @@ $(document).on("ready", function () {
             height: 466,
             width: 355,
         })
-        setTimeout(function() {
+        setTimeout(function () {
             $("div.wishes[data-id='" + id + "']").animate({
                 scrollTop: $("div.wishes[data-id='" + id + "']").get(0).scrollHeight
             })
@@ -117,7 +117,17 @@ $(document).on("ready", function () {
                     password: pass
                 }
             }).then(function (data) {
-                if (data) {
+                if (data === "Invalid Username") {
+                    // let user know user doesn't exist
+                    $("#user-signin").attr("placeholder", "Invalid Username");
+                    $("#user-signin").val("");
+                    $("#user-signin").focus();
+                } else if (!data) {
+                    // let user know password is invalid
+                    $("#pw-signin").attr("placeholder", "Invalid Password");
+                    $("#pw-signin").val("");
+                    $("#pw-signin").focus();
+                } else {
                     // run signedin function
                     signedIn(data);
 
@@ -128,11 +138,6 @@ $(document).on("ready", function () {
                     }, function () {
                         $("div#signin").addClass("d-none");
                     })
-                } else {
-                    // let user know password is invalid
-                    $("#pw-signin").attr("placeholder", "Invalid Password");
-                    $("#pw-signin").val("");
-                    $("#pw-signin").focus();
                 }
             })
         } else {
@@ -263,7 +268,7 @@ $(document).on("ready", function () {
     $(document).on("click", "a.send", function (event) {
         event.preventDefault();
         var id = $(this).data("id");
-        var message = $("input.wish[data-id='"+id+"']").val().trim();
+        var message = $("input.wish[data-id='" + id + "']").val().trim();
         // text validation
         if (message) {
             // create data object
@@ -276,7 +281,7 @@ $(document).on("ready", function () {
                 url: "../../wish/" + id,
                 type: "POST",
                 data: data
-            }).then(function(data) {
+            }).then(function (data) {
                 if (data) {
                     $("input.wish").attr("placeholder", "")
                     $("input.wish").val("")
@@ -309,22 +314,22 @@ $(document).on("ready", function () {
         })
     })
 
-        // do something when delete favorite button is clicked
-        $(document).on("click", "button.delete-favorite", function (event) {
-            event.preventDefault();
-    
-            // make post request to server
-            $.ajax({
-                url: "../../favorite",
-                type: "DELETE",
-                data: {
-                    userId: userId,
-                    polishId: $(this).data("id"),
-                }
-            }).then(function (data) {
-                location.reload();
-            })
+    // do something when delete favorite button is clicked
+    $(document).on("click", "button.delete-favorite", function (event) {
+        event.preventDefault();
+
+        // make post request to server
+        $.ajax({
+            url: "../../favorite",
+            type: "DELETE",
+            data: {
+                userId: userId,
+                polishId: $(this).data("id"),
+            }
+        }).then(function (data) {
+            location.reload();
         })
+    })
 
     // do something with view favorites link is clicked
     $(document).on("click", "a.saved", function (event) {
