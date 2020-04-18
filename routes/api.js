@@ -11,6 +11,15 @@ module.exports = function (app) {
     app.get("/", function (req, res) {
         db.Polish.find({}).populate("wish")
             .then(function (data) {
+                // check if item still exists
+                data.forEach(polish => {
+                    axios
+                        .get("http:" + polish.img)
+                        // remove if it doesn't exist
+                        .catch(err => {
+                            db.Polish.remove({ _id: polish._id }).then(() => console.log("polish removed"))
+                        })
+                })
                 res.render("index", { polish: data })
             }).catch(function (err) {
                 console.log(err)
@@ -282,6 +291,8 @@ function scrapeLiveLove(root, path, cb) {
                         db.Polish.create(polish);
                         console.log("new polish added");
                     }
+                }).catch(err => {
+                    console.log(err)
                 })
 
             // push polish into polishes array for response data
@@ -333,6 +344,9 @@ function scrapeEmilyDeMolly(root, path, cb) {
                         db.Polish.create(polish);
                         console.log("new polish added");
                     }
+                })
+                .catch(err => {
+                    console.log(err)
                 })
 
             // push polish into polishes array for response data
