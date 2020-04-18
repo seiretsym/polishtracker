@@ -14,7 +14,7 @@ module.exports = function (app) {
                 // check if item still exists
                 data.forEach(polish => {
                     axios
-                        .get("http:" + polish.img)
+                        .get(polish.link)
                         // remove if it doesn't exist
                         .catch(err => {
                             db.Polish.remove({ _id: polish._id }).then(() => console.log("polish removed"))
