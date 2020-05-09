@@ -25,7 +25,12 @@ app.use(routes);
 
 // mongoose db
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/sparkles";
-mongoose.connect(MONGODB_URI);
+const configs = {
+    useFindAndModify: false,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}
+mongoose.connect(MONGODB_URI, configs);
 
 // start server
 const PORT = process.env.PORT || 3377;

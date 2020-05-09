@@ -4,7 +4,9 @@
   "description": "polish tracker",
   "main": "server.js",
   "dependencies": {
+    "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
+    "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "mongoose": "^5.9.13",
