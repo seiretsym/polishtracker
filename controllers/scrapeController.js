@@ -12,7 +12,13 @@ module.exports = {
       polishes = [...data];
       scrapeLiveLove("whats-new", null, null, function (data) {
         polishes = [...polishes, ...data];
-        res.status(200).json(polishes)
+        scrapeEmilyDeMolly("new-release", null, null, function (data) {
+          polishes = [...polishes, ...data];
+          scrapeEmilyDeMolly("best-sellers", null, null, function (data) {
+            polishes = [...polishes, ...data];
+            res.status(200).json(polishes);
+          })
+        })
       })
     });
   }
@@ -82,5 +88,65 @@ function scrapeLiveLove(type, page, polish, cb) {
     } else {
       return cb(polishes);
     }
+  });
+}
+
+function scrapeEmilyDeMolly(type, page, polish, cb) {
+  let url;
+
+  // check for pages
+  if (page) {
+    url = `https://emily-de-molly.myshopify.com/collections/${type}?page=${page}`;
+  } else {
+    url = `https://emily-de-molly.myshopify.com/collections/${type}`;
+  }
+
+  axios.get(url).then(function (response) {
+
+    // Load the HTML into cheerio and save it to a variable
+    const $ = cheerio.load(response.data);
+
+    // An empty array to save the data that we'll scrape
+    const polishes = polish || [];
+
+    // get them alllllllllllll
+    $("div.product-grid").children("div.grid-item").each(function (i, element) {
+      const name = $(element).children().children("p").children("span").text().trim();
+      let price = $(element).children().children("p").text().trim();
+      // trim the price from the nasty string
+      price = price.slice(price.length - 7, price.length);
+      price = price.replace(/ +/g, "");
+      price = price.replace(/\n/g, "");
+      price = price.replace("$", "");
+      const link = $(element).children("a").attr("href");
+      const img = $(element).find("div.product-grid-image").children().children("img").attr("src");
+      // push result into polishes as an object
+      const polish = {
+        name: name,
+        price: parseFloat(price).toFixed(2),
+        link: "https://emily-de-molly.myshopify.com" + link,
+        img: "https:" + img,
+        type: type,
+        brand: "Emily de Molly"
+      };
+
+      // attempt to find then update/create
+      db.Polish.findOneAndUpdate({ name: polish.name }, { $set: polish }, { new: true })
+        .then(function (data) {
+          if (!data) {
+            // create new polish
+            db.Polish.create(polish);
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+
+      // push polish into polishes array for response data
+      polishes.push(polish);
+    });
+
+    // return callback
+    return cb(polishes);
   });
 }
