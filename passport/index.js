@@ -11,11 +11,11 @@ passport.use(new LocalStrategy(
   },
   // check user credentials
   (username, password, done) => {
+    console.log(username, password)
+    console.log("passport authenticate")
     // query db
     db.User.findOne({
-      where: {
-        username: username
-      }
+      username: username
     }).then(user => {
       // check if user exists
       if (!user) {
@@ -29,7 +29,7 @@ passport.use(new LocalStrategy(
           message: "Invalid Password"
         });
       }
-      // return user otherwise
+      // all good? return user
       else {
         return done(null, user);
       };

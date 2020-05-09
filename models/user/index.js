@@ -21,17 +21,20 @@ const UserSchema = new Schema({
 })
 
 // add a hook to hash password before create
-UserSchema.pre("save", user => {
-    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+UserSchema.pre("save", function (next) {
+    if (this.isModified('password')) {
+        this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10), null);
+    }
+    return next();
 });
+
+// method for verifying password
+UserSchema.methods.checkPassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 // create model
 const User = mongoose.model("User", UserSchema);
-
-// method for verifying password
-User.prototype.checkPassword = password => {
-    return bcrypt.compareSync(password, this.password)
-};
 
 // export model
 module.exports = User;
