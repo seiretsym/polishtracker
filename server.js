@@ -12,7 +12,7 @@ app.use(express.json());
 
 // for heroku & react
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
+  app.use(express.static("client/build"));
 }
 
 // passport config
@@ -26,14 +26,14 @@ app.use(routes);
 // mongoose db
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/sparkles";
 const configs = {
-    useFindAndModify: false,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+  useFindAndModify: false,
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 }
 mongoose.connect(MONGODB_URI, configs);
 
 // start server
 const PORT = process.env.PORT || 3377;
 app.listen(PORT, function () {
-    console.log("App running on port " + PORT);
+  console.log("App running on port " + PORT);
 });

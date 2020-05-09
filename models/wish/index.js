@@ -5,14 +5,14 @@ const Schema = mongoose.Schema
 
 // create schema
 const WishSchema = new Schema({
-    username: {
-        type: String,
-        required: true
-    },
-    message: {
-        type: String,
-        required: true
-    }
+  username: {
+    type: String,
+    required: true
+  },
+  message: {
+    type: String,
+    required: true
+  }
 })
 
 // create model
