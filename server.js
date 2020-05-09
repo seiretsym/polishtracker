@@ -2,6 +2,8 @@
 const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
+const passport = require("passport");
+const routes = require("./routes");
 
 // middleware
 const app = express();
@@ -19,10 +21,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // routing
-app.use("routes");
+app.use(routes);
 
 // mongoose db
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/polishFinder";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/sparkles";
 mongoose.connect(MONGODB_URI);
 
 // start server

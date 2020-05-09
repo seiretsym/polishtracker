@@ -20,18 +20,18 @@ const UserSchema = new Schema({
     }]
 })
 
+// add a hook to hash password before create
+UserSchema.pre("save", user => {
+    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+});
+
 // create model
 const User = mongoose.model("User", UserSchema);
 
 // method for verifying password
 User.prototype.checkPassword = password => {
     return bcrypt.compareSync(password, this.password)
-}
-
-// add a hook to hash password before create
-User.addHook("beforeCreate", user => {
-    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
-})
+};
 
 // export model
 module.exports = User;

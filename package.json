@@ -1,0 +1,29 @@
+{
+  "name": "sparkles",
+  "version": "1.0.0",
+  "description": "polish tracker",
+  "main": "server.js",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.9.13",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seiretsym/polishtracker.git"
+  },
+  "author": "kerwin hy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seiretsym/polishtracker/issues"
+  },
+  "homepage": "https://github.com/seiretsym/polishtracker#readme"
+}
