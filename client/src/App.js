@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Main from "./pages/main";
 import { StoreProvider } from "./utils/globalState";
+import Main from "./pages/main";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 function App() {
   return (

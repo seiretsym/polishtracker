@@ -5,7 +5,7 @@ class Nav extends Component {
     return (
       <div className="jumbotron">
         <h1>Sparkles</h1>
-        <hp>...because your nails deserve to be fabulous!</hp>
+        <p>...because your nails deserve to be fabulous!</p>
       </div>
     )
   };
