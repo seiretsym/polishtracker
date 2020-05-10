@@ -7,6 +7,8 @@ router.route("/register")
   .post(userController.create);
 router.route("/login")
   .post(passport.authenticate("local"), (req, res) => {
-    res.status(202).json(req.user);
+    res.status(200).json(true);
   });
+router.route("/logout")
+  .get(userController.logout);
 module.exports = router;

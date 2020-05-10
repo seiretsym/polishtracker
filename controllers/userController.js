@@ -4,16 +4,16 @@ const db = require("../models");
 module.exports = {
   // create new user
   create: (req, res) => {
-    const { username, password } = req.body;
-    db.User.create({
-      username: username,
-      password: password
-    }).then(() => {
+    db.User.create(req.body).then(() => {
       // redirect user to login
       res.redirect(307, "/api/users/login")
     }).catch(err => {
       // dat error :<
       res.status(401).json(err);
     })
+  },
+  logout: (req, res) => {
+    req.logout();
+    res.status(200).json(false);
   }
 };

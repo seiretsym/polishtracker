@@ -11,8 +11,6 @@ passport.use(new LocalStrategy(
   },
   // check user credentials
   (username, password, done) => {
-    console.log(username, password)
-    console.log("passport authenticate")
     // query db
     db.User.findOne({
       username: username
@@ -31,7 +29,7 @@ passport.use(new LocalStrategy(
       }
       // all good? return user
       else {
-        return done(null, user);
+        return done(null, true);
       };
     });
   }
