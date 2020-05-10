@@ -9,7 +9,6 @@ function App() {
           <Nav />
           <Switch>
             <Route exact path="/" component={Main} />
-            <Route path="/scores" component={Scores} />
           </Switch>
         </StoreProvider>
         <Footer />
