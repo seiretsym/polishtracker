@@ -1,6 +1,10 @@
 Work in progress. Check back in later.
 
 # Done:
+**UI Design**
+- Brand/Logo
+- Nav Bar
+
 **Passport**
 - User Authentication
 - Local Strategy
@@ -35,7 +39,6 @@ Work in progress. Check back in later.
 
 # In Progress:
 **UI Design**
-- Nav Bar
 - Content
 - Views
 
@@ -43,6 +46,7 @@ Work in progress. Check back in later.
 - Ajax Calls
 - Event Listeners
 - ???
+- Sort/Filters
 
 **API Routing**
 - Wishes

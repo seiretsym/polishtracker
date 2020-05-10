@@ -1,8 +1,144 @@
 body {
-  background - image: url("https://wallpaperaccess.com/full/39632.jpg");
-  background - repeat: no - repeat;
-  background - position: center center;
-  background - size: cover;
-  background - attachment: fixed;
-  background - color: #000000;
+  background-image: url("https://wallpaperaccess.com/full/39632.jpg");
+  background-repeat: no - repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #000000;
+}
+
+.nav {
+  background-color: rgba(0, 52, 99, 0.5);
+  padding: 20px;
+  margin-top: 20px !important;
+  border-radius: 20px;
+  filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
+  display: flex;
+}
+
+.brand {
+  background-color: rgba(0, 52, 99, 0.5);
+  padding-bottom: 20px;
+  padding-top: 1px;
+  margin-top: 20px !important;
+  border-radius: 20px;
+  filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
+}
+
+.brand-name {
+  font-family: 'Indie Flower', cursive;
+  font-size: 100px;
+  color: #bd67c4;
+  text-shadow: 0px 0px 5px rgba(6, 225, 225, 0.5);
+  text-align: center;
+}
+
+.brand-text {
+  position: relative;
+  font-family: 'Indie Flower', cursive;
+  top: -45px;
+  color: #06bbdd;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+  text-align: center;
+}
+
+.account .dropdown-button {
+  background-color: rgba(0, 0, 55, 0.2);
+  border-radius: 20px;
+  outline: none;
+  color: #06bbdd;
+  height: 45px;
+  text-transform: unset;
+}
+
+.account .dropdown-button:hover,
+.account .dropdown-button:focus {
+  background-color: rgba(0, 0, 55, 0.5);
+  filter: drop-shadow(0px 0px 5px rgb(6, 225, 225));
+  border-radius: 20px;
+  color: #e4a1eb;
+}
+
+.account .dropdown-content {
+  background-color: rgba(0, 52, 99, 0.5);
+  filter: drop-shadow(0px 0px 5px rgb(6, 225, 225));
+  border-radius: 20px;
+}
+
+.link {
+  background-color: transparent !important;
+  border: none;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  padding: 15px;
+  color: #06bbdd;
+}
+
+.account .dropdown-content li:hover {
+  background-color: rgba(0, 52, 99, 0.5);
+  filter: drop-shadow(0px 0px 5px rgb(6, 225, 225));
+}
+
+.account .dropdown-content li button:hover {
+  color: #e4a1eb;
+}
+
+.account {
+  margin-left: auto;
+}
+
+.sort,
+.order,
+.type {
+  margin-left: 20px;
+}
+
+.input-field {
+  color: #e4a1eb;
+  margin: 0px 15px 0px 0px !important;
+  background-color: rgba(0, 0, 55, 0.2);
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 55, 0.2));
+  border-radius: 20px;
+  transition: .2s ease-out;
+}
+
+.select-wrapper input:focus {
+  background-color: rgba(0, 0, 55, 0.5);
+  filter: drop-shadow(0px 0px 5px rgb(6, 225, 225));
+  border-radius: 20px;
+}
+
+.select-wrapper input {
+  padding: 0px 0px 0px 15px !important;
+  width: 150px !important;
+  margin: 0px !important;
+  border: none !important;
+}
+
+.select-wrapper .dropdown-content {
+  top: 45px !important;
+  background-color: rgba(0, 52, 99, 0.5);
+  filter: drop-shadow(0px 0px 5px rgb(6, 225, 225));
+  border-radius: 20px;
+}
+
+.select-wrapper .dropdown-content .disabled {
+  display: none;
+}
+
+.select-wrapper .dropdown-content li:hover,
+.select-wrapper .dropdown-content li.active {
+  background-color: rgba(0, 52, 99, 0.5);
+  filter: drop-shadow(0px 0px 5px rgb(6, 225, 225));
+}
+
+.select-wrapper .dropdown-content li span:hover,
+.select-wrapper .dropdown-content li.active span {
+  color: #e4a1eb;
+}
+
+span.caret {
+  color: #e4a1eb !important;
+  margin-right: 15px !important;
 }
