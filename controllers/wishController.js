@@ -24,5 +24,16 @@ module.exports = {
       }).catch(err => {
         res.status(401).json(err)
       });
+  },
+  findOne: (req, res) => {
+    db.Polish
+      .findOne({ _id: req.params.id })
+      .populate("wishes")
+      .then(({ wishes }) => {
+        res.status(302).json(wishes);
+      })
+      .catch(err => {
+        res.status(202).json(err);
+      });
   }
 };

@@ -30,7 +30,7 @@ const PolishSchema = new Schema({
     type: String,
     required: true,
   },
-  wish: [{
+  wishes: [{
     type: Schema.Types.ObjectId,
     ref: "Wish"
   }]

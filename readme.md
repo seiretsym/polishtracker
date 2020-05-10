@@ -11,12 +11,20 @@ Work in progress. Check back in later.
 - Wishes Model
 
 **Controllers**
-- Scrape Controller
+- Scrapes
   - Scrape Live Love Polish
   - Scrape Emily de Molly
-- User Controller
+- Users
   - Create new user
   - Authenticate existing user
+- Wishes
+  - Get All Wishes for relative Polish
+  - Post a new Wish
+- Polishes
+  - Get all polishes
+  - Get user's favorites
+  - Save polish to favorite
+  - Remove polish to favorite
 
 **Server Configurations**
 - Setup Express Server
@@ -35,21 +43,6 @@ Work in progress. Check back in later.
 - Ajax Calls
 - Event Listeners
 - ???
-
-**Controllers**
-- Wishes
-  - Get All Wishes for relative Polish
-  - Post a new Wish
-- Users
-  - Save polish to favorite
-  - Remove polish to favorite
-- Polishes
-  - Get all polishes
-  - Sort polishes
-    - Sort by Name
-    - Sort by Brand
-    - Sort by Price
-    - Sort by Type
 
 **API Routing**
 - Wishes
