@@ -1,13 +1,16 @@
 import React, { createContext, useReducer, useContext } from "react";
-import { PLACEHOLDER } from "./actions";
+import { AUTH } from "./actions";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case PLACEHOLDER:
-      return state;
+    case AUTH:
+      return {
+        ...state,
+        user: action.auth
+      }
     default:
       return state;
   }

@@ -3,10 +3,13 @@ import axios from "axios";
 export default {
   // user routes
   createUser: function (data) {
-    return axios.post("/api/users/register")
+    return axios.post("/api/users/register", data);
   },
   authUser: function (data) {
-    return axios.post("/api/users/login")
+    return axios.post("/api/users/login", data);
+  },
+  signout: function () {
+    return axios.get("/api/users/logout");
   },
 
   // polish routes

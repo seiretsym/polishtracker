@@ -1,1 +1,1 @@
-export const PLACEHOLDER = "PLACEHOLDER";
+export const AUTH = "AUTH";

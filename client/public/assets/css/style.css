@@ -7,6 +7,70 @@ body {
   background-color: #000000;
 }
 
+.modal {
+  background-color: rgba(0, 52, 99, 0.5);
+  filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  overflow: visible;
+}
+
+.modal .btn {
+  margin-right: 20px !important;
+}
+
+.modal-content {
+  padding: 20px 20px 0px 20px !important;
+}
+
+.modal-footer {
+  display: flex;
+  padding: 0px 20px 20px 20px !important;
+  margin-bottom: 20px !important;
+  background-color: transparent !important;
+  justify-content: left;
+}
+
+form .input-field {
+  background-color: rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+
+form .input-field input {
+  color: #06bbdd;
+}
+
+form .input-field label {
+  color: #e4a1eb
+}
+
+form .input-field input[type=text],
+form .input-field input[type=text]:focus,
+form .input-field input[type=text]:focus:not([readonly]),
+form .input-field input[type=password],
+form .input-field input[type=password]:focus,
+form .input-field input[type=password]:focus:not([readonly]) {
+  margin-bottom: 0px;
+  padding-left: 15px;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.btn {
+  text-transform: unset;
+}
+
+.modal-content h4 {
+  color: #e4a1eb !important;
+}
+
+.modal-content p {
+  color: #06bbdd !important;
+}
+
 .card {
   background-color: rgba(255, 255, 255, 0.05);
   filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
@@ -172,7 +236,8 @@ a:hover {
   text-align: center;
 }
 
-.account .dropdown-button {
+.account .dropdown-button,
+.modal .dropdown-button {
   background-color: rgba(0, 0, 55, 0.2);
   border-radius: 20px;
   outline: none;
@@ -182,7 +247,9 @@ a:hover {
 }
 
 .account .dropdown-button:hover,
-.account .dropdown-button:focus {
+.account .dropdown-button:focus,
+.modal .dropdown-button:hover,
+.modal .dropdown-button:focus {
   background-color: rgba(0, 0, 55, 0.5);
   filter: drop-shadow(0px 0px 5px rgb(6, 225, 225));
   border-radius: 20px;
@@ -202,7 +269,11 @@ a:hover {
   height: 100%;
   text-align: left;
   padding: 15px;
-  color: #06bbdd;
+  color: #06bbdd !important;
+}
+
+.link:hover {
+  color: #e4a1eb !important;
 }
 
 .account .dropdown-content li:hover {
@@ -224,19 +295,21 @@ a:hover {
   margin-left: 20px;
 }
 
-.input-field {
+.nav .input-field {
   color: #e4a1eb;
   margin: 0px 15px 0px 0px !important;
   background-color: rgba(0, 0, 55, 0.2);
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 55, 0.2));
   border-radius: 20px;
   transition: .2s ease-out;
+  border: none !important;
 }
 
 .select-wrapper input:focus {
   background-color: rgba(0, 0, 55, 0.5);
   filter: drop-shadow(0px 0px 5px rgb(6, 225, 225));
   border-radius: 20px;
+  border: none !important;
 }
 
 .select-wrapper input {
@@ -259,13 +332,15 @@ a:hover {
 }
 
 .select-wrapper .dropdown-content li:hover,
-.select-wrapper .dropdown-content li.active {
+.select-wrapper .dropdown-content li.active,
+.select-wrapper .dropdown-content li.selected {
   background-color: rgba(0, 52, 99, 0.5);
   filter: drop-shadow(0px 0px 5px rgb(6, 225, 225));
 }
 
 .select-wrapper .dropdown-content li span:hover,
-.select-wrapper .dropdown-content li.active span {
+.select-wrapper .dropdown-content li.active span,
+.select-wrapper .dropdown-content li.selected span {
   color: #e4a1eb;
 }
 

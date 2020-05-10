@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { StoreProvider, useStoreContext } from "./utils/globalState";
+import { StoreProvider } from "./utils/globalState";
 import Main from "./pages/main";
 import Brand from "./components/Brand";
 import Nav from "./components/Nav";

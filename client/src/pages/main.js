@@ -1,19 +1,15 @@
-import React, { Component } from "react";
-import Card from "../components/Card";
-import API from "../utils/api";
+import React from "react";
+import { useStoreContext } from "../utils/globalState";
 
-class Main extends Component {
-  render() {
-    return (
-      <div className="container content">
-        <div className="row">
-          {/* {this.state.polishes.map(polish => {
-            return <Card {...polish} key={polish._id} />
-          })} */}
-        </div>
+function Main() {
+  const [state, dispatch] = useStoreContext();
+
+  return (
+    <div className="container content">
+      <div className="row">
       </div>
-    )
-  };
-}
+    </div>
+  )
+};
 
 export default Main;
