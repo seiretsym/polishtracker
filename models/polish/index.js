@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("../user");
 
 // schema structure
 const Schema = mongoose.Schema
@@ -33,6 +34,20 @@ const PolishSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Wish"
   }]
+})
+
+// add hook to remove polish from favorites when polish is deleted
+PolishSchema.pre("remove", function (next) {
+  User
+    .find({},
+      {
+        $pull: {
+          polishes: this._id
+        }
+      })
+    .then(() => {
+      next();
+    })
 })
 
 // create model

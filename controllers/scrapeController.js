@@ -4,7 +4,7 @@ const cheerio = require("cheerio");
 
 // defining methods used for polish queries
 module.exports = {
-  scrape: function (req, res) {
+  scrape: (req, res) => {
     // define an array to store all scraped polish data
     let polishes = [];
     // begin callback hell
@@ -16,7 +16,7 @@ module.exports = {
           polishes = [...polishes, ...data];
           scrapeEmilyDeMolly("best-sellers", null, null, function (data) {
             polishes = [...polishes, ...data];
-            res.status(200).json(polishes);
+            res.status(202).json(polishes);
           })
         })
       })
