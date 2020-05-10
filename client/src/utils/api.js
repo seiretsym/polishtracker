@@ -19,7 +19,7 @@ export default {
   addFavorite: function (id) {
     return axios.post(`/api/favorites/${id}`)
   },
-  removeFavorite: function () {
+  removeFavorite: function (id) {
     return axios.delete(`/api/favorites/${id}`)
   },
 

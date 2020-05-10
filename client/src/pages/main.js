@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+import Card from "../components/Card";
+import API from "../utils/api";
 
 class Main extends Component {
   render() {
     return (
-      <div>
-        <h1>Content Body</h1>
+      <div className="container content">
+        <div className="row">
+          {/* {this.state.polishes.map(polish => {
+            return <Card {...polish} key={polish._id} />
+          })} */}
+        </div>
       </div>
     )
   };

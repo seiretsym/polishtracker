@@ -5,8 +5,9 @@ module.exports = {
   findAll: (req, res) => {
     db.Polish
       .find({})
+      .populate("wishes")
       .then(data => {
-        res.status(302).json(data);
+        res.status(200).json(data);
       })
       .catch(err => {
         res.status(404).json(err);
@@ -17,7 +18,7 @@ module.exports = {
       .find(req.user)
       .populate("favorites")
       .then(({ favorites }) => {
-        res.status(302).json(favorites);
+        res.status(200).json(favorites);
       })
       .catch(err => {
         res.status(404).json(err);

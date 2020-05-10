@@ -15,6 +15,10 @@ const reducer = (state, action) => {
 
 const StoreProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
+    user: {
+      authed: false,
+    },
+    polishes: [],
   });
 
   return <Provider value={[state, dispatch]} {...props} />;
