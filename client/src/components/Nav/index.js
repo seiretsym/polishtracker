@@ -7,6 +7,18 @@ import { AUTH } from "../../utils/actions";
 function Nav() {
   const [state, dispatch] = useStoreContext();
 
+  function openSigninModal() {
+    document.getElementById("signin-modal").classList.add("open");
+  }
+
+  function openRegisterModal() {
+    document.getElementById("register-modal").classList.add("open");
+  }
+
+  function openSignOutModal() {
+    document.getElementById("message-modal").classList.add("open");
+  }
+
   function handleSignOut() {
     API
       .signout()
@@ -15,6 +27,7 @@ function Nav() {
           type: AUTH,
           auth: { authed: false }
         })
+        document.getElementById("message-modal").classList.remove("open");
       })
   }
 
@@ -24,14 +37,14 @@ function Nav() {
       return (
         <div>
           <li><a href="./favorites" className="link btn">Favorites</a></li>
-          <li><Message message="You have successfully signed out." onClick={handleSignOut} buttonName="Sign Out" /></li>
+          <li><button className="link" onClick={openSignOutModal}>Sign Out</button></li>
         </div>
       )
     } else {
       return (
         <div>
-          <li><Signin /></li>
-          <li><Registration /></li>
+          <li><button className="link" onClick={openSigninModal}>Sign In</button></li>
+          <li><button className="link" onClick={openRegisterModal}>Register</button></li>
         </div>
       )
     }
@@ -41,37 +54,37 @@ function Nav() {
     <div className="container">
       <div className="nav">
         <div className="input-field collections">
-          <select id="brand" defaultValue="">
+          <select id="brand" defaultValue={state.filter.brand}>
             <option value="">All</option>
             <option value="Live Love Polish">Live Love Polish</option>
             <option value="Emily de Molly">Emily de Molly</option>
           </select>
-          <label for="brand">Brand</label>
+          <label htmlFor="brand">Brand</label>
         </div>
 
         <div className="input-field type">
-          <select id="type" defaultValue="">
+          <select id="type" defaultValue={state.filter.type}>
             <option value="">All</option>
             <option value="best-sellers">Best Sellers</option>
             <option value="whats-new">What's New</option>
           </select>
-          <label for="id">Type</label>
+          <label htmlFor="id">Type</label>
         </div>
 
         <div className="input-field sort">
-          <select id="sort" defaultValue="name">
+          <select id="sort" defaultValue={state.filter.sort}>
             <option value="name">Name</option>
             <option value="price">Price</option>
           </select>
-          <label for="sort">Sort by</label>
+          <label htmlFor="sort">Sort by</label>
         </div>
 
         <div className="input-field order">
-          <select id="order" defaultValue="1">
+          <select id="order" defaultValue={state.filter.order}>
             <option value="1">Ascending</option>
             <option value="-1">Descending</option>
           </select>
-          <label for="order">Order by</label>
+          <label htmlFor="order">Order by</label>
         </div>
 
         <div className="account">
@@ -81,6 +94,9 @@ function Nav() {
           <button className="dropdown-button btn" data-beloworigin="true" data-activates="account">Account</button>
         </div>
       </div>
+      <Registration />
+      <Signin />
+      <Message message="You have successfully signed out." onClick={handleSignOut} />
     </div>
   )
 };

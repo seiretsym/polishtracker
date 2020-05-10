@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useContext } from "react";
-import { AUTH } from "./actions";
+import { AUTH, SET_POLISHES } from "./actions";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
@@ -10,6 +10,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: action.auth
+      }
+    case SET_POLISHES:
+      return {
+        ...state,
+        polishes: action.polishes
       }
     default:
       return state;
@@ -22,6 +27,12 @@ const StoreProvider = ({ value = [], ...props }) => {
       authed: false,
     },
     polishes: [],
+    filter: {
+      brand: "",
+      type: "",
+      sort: "name",
+      order: "1"
+    }
   });
 
   return <Provider value={[state, dispatch]} {...props} />;
