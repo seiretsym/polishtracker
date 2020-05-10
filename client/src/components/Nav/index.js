@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useStoreContext } from "../../utils/globalState";
 import { Registration, Signin, Message } from "../Modal";
 import API from "../../utils/api"
-import { AUTH } from "../../utils/actions";
+import { AUTH, SET_FILTERS } from "../../utils/actions";
 
 function Nav() {
   const [state, dispatch] = useStoreContext();
@@ -17,6 +17,20 @@ function Nav() {
 
   function openSignOutModal() {
     document.getElementById("message-modal").classList.add("open");
+  }
+
+  function handleChange(event) {
+    const { id, name, value } = event.target;
+    dispatch({
+      type: SET_FILTERS,
+      filters: {
+        ...state.filters,
+        [id]: {
+          filter: value,
+          name: name
+        }
+      }
+    })
   }
 
   function handleSignOut() {
@@ -54,37 +68,73 @@ function Nav() {
     <div className="container">
       <div className="nav">
         <div className="input-field collections">
-          <select id="brand" defaultValue={state.filter.brand}>
-            <option value="">All</option>
-            <option value="Live Love Polish">Live Love Polish</option>
-            <option value="Emily de Molly">Emily de Molly</option>
-          </select>
-          <label htmlFor="brand">Brand</label>
+          <div className="brand-div">
+            <ul id="brand-list" className="dropdown-content">
+              <li>
+                <button id="brand" name="All" className="link brand-link" value="" onClick={handleChange}>All</button>
+              </li>
+              <li>
+                <button id="brand" name="Live Love Polish" className="link brand-link" value="Live Love Polish" onClick={handleChange}>Live Love Polish</button>
+              </li>
+              <li>
+                <button id="brand" name="Emily de Molly" className="link brand-link" value="Emily de Molly" onClick={handleChange}>Emily de Molly</button>
+              </li>
+            </ul>
+            <input id="brand-button" type="text" className="dropdown-button btn brand-btn" data-beloworigin="true" data-activates="brand-list" value={state.filters.brand.name} readOnly />
+            <span className="caret">▼</span>
+            <label htmlFor="brand-button">Brand</label>
+          </div>
         </div>
 
         <div className="input-field type">
-          <select id="type" defaultValue={state.filter.type}>
-            <option value="">All</option>
-            <option value="best-sellers">Best Sellers</option>
-            <option value="whats-new">What's New</option>
-          </select>
-          <label htmlFor="id">Type</label>
+          <div className="type-div">
+            <ul id="type-list" className="dropdown-content">
+              <li>
+                <button id="type" name="All" className="link type-link" value="" onClick={handleChange}>All</button>
+              </li>
+              <li>
+                <button id="type" name="Best Sellers" className="link type-link" value="best-sellers" onClick={handleChange}>Best Sellers</button>
+              </li>
+              <li>
+                <button id="type" name="New Releases" className="link type-link" value="whats-new" onClick={handleChange}>New Releases</button>
+              </li>
+            </ul>
+            <input id="type-button" type="text" className="dropdown-button btn type-btn" data-beloworigin="true" data-activates="type-list" value={state.filters.type.name} onChange={handleChange} readOnly />
+            <span className="caret">▼</span>
+            <label htmlFor="type-button">Type</label>
+          </div>
         </div>
 
         <div className="input-field sort">
-          <select id="sort" defaultValue={state.filter.sort}>
-            <option value="name">Name</option>
-            <option value="price">Price</option>
-          </select>
-          <label htmlFor="sort">Sort by</label>
+          <div className="sort-div">
+            <ul id="sort-list" className="dropdown-content">
+              <li>
+                <button id="sort" name="Name" className="link sort-link" value="name" onClick={handleChange}>Name</button>
+              </li>
+              <li>
+                <button id="sort" name="Price" className="link sort-link" value="price" onClick={handleChange}>Price</button>
+              </li>
+            </ul>
+            <input id="sort-button" type="text" className="dropdown-button btn sort-btn" data-beloworigin="true" data-activates="sort-list" value={state.filters.sort.name} onChange={handleChange} readOnly />
+            <span className="caret">▼</span>
+            <label htmlFor="sort-button">Sort by</label>
+          </div>
         </div>
 
         <div className="input-field order">
-          <select id="order" defaultValue={state.filter.order}>
-            <option value="1">Ascending</option>
-            <option value="-1">Descending</option>
-          </select>
-          <label htmlFor="order">Order by</label>
+          <div className="order-div">
+            <ul id="order-list" className="dropdown-content">
+              <li>
+                <button id="order" name="Ascending" className="link order-link" value="1" onClick={handleChange}>Name</button>
+              </li>
+              <li>
+                <button id="order" name="Descending" className="link order-link" value="-1" onClick={handleChange}>Price</button>
+              </li>
+            </ul>
+            <input id="order-button" type="text" className="dropdown-button btn order-btn" data-beloworigin="true" data-activates="order-list" value={state.filters.order.name} onChange={handleChange} readOnly />
+            <span className="caret">▼</span>
+            <label htmlFor="order-button">Order by</label>
+          </div>
         </div>
 
         <div className="account">

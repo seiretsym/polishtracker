@@ -22,6 +22,19 @@ body {
   z-index: 1000 !important;
 }
 
+.brand-list,
+.brand-btn,
+.type-list,
+.type-btn,
+.sort-list,
+.sort-btn,
+.order-list,
+.order-btn {
+  color: #e4a1eb !important;
+  text-align: left;
+  width: 170px;
+}
+
 .modal .btn {
   margin-right: 20px !important;
 }
@@ -61,6 +74,25 @@ form .input-field input[type=password]:focus,
 form .input-field input[type=password]:focus:not([readonly]) {
   margin-bottom: 0px;
   padding-left: 15px;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+input[type=text].brand-btn,
+input[type=text].brand-btn:focus,
+input[type=text].brand-btn:focus:not([readonly]),
+input[type=text].type-btn,
+input[type=text].type-btn:focus,
+input[type=text].type-btn:focus:not([readonly]),
+input[type=text].sort-btn,
+input[type=text].sort-btn:focus,
+input[type=text].sort-btn:focus:not([readonly]),
+input[type=text].order-btn,
+input[type=text].order-btn:focus,
+input[type=text].order-btn:focus:not([readonly]) {
+  margin-bottom: 0px;
+  padding-left: 15px;
+  width: 150px;
   border-bottom: none;
   box-shadow: none;
 }
@@ -242,7 +274,7 @@ a:hover {
   text-align: center;
 }
 
-.account .dropdown-button,
+.dropdown-button,
 .modal .dropdown-button {
   background-color: rgba(0, 0, 55, 0.2);
   border-radius: 20px;
@@ -252,8 +284,8 @@ a:hover {
   text-transform: unset;
 }
 
-.account .dropdown-button:hover,
-.account .dropdown-button:focus,
+.dropdown-button:hover,
+.dropdown-button:focus,
 .modal .dropdown-button:hover,
 .modal .dropdown-button:focus {
   background-color: rgba(0, 0, 55, 0.5);
@@ -262,7 +294,7 @@ a:hover {
   color: #e4a1eb;
 }
 
-.account .dropdown-content {
+.dropdown-content {
   background-color: rgba(0, 52, 99, 0.5);
   filter: drop-shadow(0px 0px 5px rgb(6, 225, 225));
   border-radius: 20px;
@@ -282,12 +314,12 @@ a:hover {
   color: #e4a1eb !important;
 }
 
-.account .dropdown-content li:hover {
+.dropdown-content li:hover {
   background-color: rgba(0, 52, 99, 0.5);
   filter: drop-shadow(0px 0px 5px rgb(6, 225, 225));
 }
 
-.account .dropdown-content li button:hover {
+.dropdown-content li button:hover {
   color: #e4a1eb;
 }
 
@@ -351,6 +383,9 @@ a:hover {
 }
 
 span.caret {
+  position: absolute;
+  top: 10px;
+  right: 15px;
   color: #e4a1eb !important;
-  margin-right: 15px !important;
+  z-index: -1;
 }

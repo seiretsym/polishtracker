@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useContext } from "react";
-import { AUTH, SET_POLISHES } from "./actions";
+import { AUTH, SET_POLISHES, SET_FILTERS } from "./actions";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
@@ -16,6 +16,11 @@ const reducer = (state, action) => {
         ...state,
         polishes: action.polishes
       }
+    case SET_FILTERS:
+      return {
+        ...state,
+        filters: action.filters
+      }
     default:
       return state;
   }
@@ -27,11 +32,23 @@ const StoreProvider = ({ value = [], ...props }) => {
       authed: false,
     },
     polishes: [],
-    filter: {
-      brand: "",
-      type: "",
-      sort: "name",
-      order: "1"
+    filters: {
+      brand: {
+        filter: "",
+        name: "All"
+      },
+      type: {
+        filter: "",
+        name: "All",
+      },
+      sort: {
+        filter: "name",
+        name: "Name",
+      },
+      order: {
+        filter: "1",
+        name: "Ascending"
+      }
     }
   });
 
