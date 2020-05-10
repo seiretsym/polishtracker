@@ -126,9 +126,14 @@ function scrapeEmilyDeMolly(type, page, polish, cb) {
         price: parseFloat(price).toFixed(2),
         link: "https://emily-de-molly.myshopify.com" + link,
         img: "https:" + img,
-        type: type,
         brand: "Emily de Molly"
       };
+
+      if (type === "new-release") {
+        polish.type = "whats-new";
+      } else {
+        polish.type = type;
+      }
 
       // attempt to find then update/create
       db.Polish.findOneAndUpdate({ name: polish.name }, { $set: polish }, { new: true })

@@ -20,18 +20,15 @@ export default {
     return axios.get("/api/polishes/favorites")
   },
   addFavorite: function (id) {
-    return axios.post(`/api/favorites/${id}`)
+    return axios.post(`/api/polishes/favorites/${id}`)
   },
   removeFavorite: function (id) {
-    return axios.delete(`/api/favorites/${id}`)
+    return axios.delete(`/api/polishes/favorites/${id}`)
   },
 
   // wish routes
-  getWishes: function (id) {
-    return axios.get(`/api/wishes/${id}`);
-  },
-  createWish: function (id) {
-    return axios.post(`/api/wishes/${id}`);
+  createWish: function (id, data) {
+    return axios.post(`/api/wishes/${id}`, data);
   },
 
   // scrape route

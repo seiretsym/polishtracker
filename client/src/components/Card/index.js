@@ -1,25 +1,40 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import API from "../../utils/api";
+import { useStoreContext } from "../../utils/globalState";
+import { Message } from "../Modal";
+import { SET_POLISHES } from "../../utils/actions";
 
-class Card extends Component {
-  state = {
-    wishMessage: ""
+function Card(props) {
+  const [state, dispatch] = useStoreContext();
+  const [wishMessage, setWishMessage] = useState();
+
+  function sendWishMessage(event) {
+    const { value } = event.target;
+    const data = {
+      message: wishMessage
+    }
+    API
+      .createWish(value, data)
+      .then(() => {
+        API
+          .getAllPolishes()
+          .then(({ data }) => {
+            dispatch({
+              type: SET_POLISHES,
+              polishes: data,
+              rendered: false
+            })
+          })
+      })
   }
 
-  sendWishMessage = event => {
+  function handleWishMessageInput(event) {
     const { value } = event.target;
-    console.log(value)
-  }
-
-  handleWishMessageInput = event => {
-    const { value } = event.target;
-    this.setState({
-      wishMessage: value
-    })
+    setWishMessage(value)
   }
 
   // function to unhide the wish card
-  openWishCard = event => {
+  function openWishCard(event) {
     const { value } = event.target;
     let wishCard = document.getElementById(value);
     const parentHeight = wishCard.parentNode.offsetHeight;
@@ -29,11 +44,11 @@ class Card extends Component {
     wishCard.style.width = "0px";
 
     wishCard.classList.remove("hidden");
-    this.openWishCardAnimate(wishCard, (parentHeight - 20), (parentWidth - 20))
+    openWishCardAnimate(wishCard, (parentHeight - 20), (parentWidth - 20))
   }
 
   // animation for opening wish card
-  openWishCardAnimate = (card, maxHeight, maxWidth) => {
+  function openWishCardAnimate(card, maxHeight, maxWidth) {
     let currentHeight = 0;
     let currentWidth = 0;
     const resize = function () {
@@ -55,19 +70,28 @@ class Card extends Component {
         let cardContent = card.children[1];
         cardContent.style.height = maxHeight - 110 + "px";
         cardContent.scrollTop = cardContent.scrollHeight;
+        window.addEventListener("resize", function (event) {
+          const parentHeight = card.parentNode.offsetHeight;
+          const parentWidth = card.parentNode.offsetWidth;
+          let cardContent = card.children[1];
+          cardContent.style.height = parentHeight - 120 + "px";
+          cardContent.scrollTop = cardContent.scrollHeight;
+          card.style.height = parentHeight - 20 + "px";
+          card.style.width = parentWidth - 20 + "px";
+        });
       };
     }
     let animation = setInterval(resize, 5);
   }
 
-  closeWishCard = event => {
+  function closeWishCard(event) {
     const { value } = event.target;
     let wishCard = document.getElementById(value);
-    this.closeWishCardAnimate(wishCard)
+    closeWishCardAnimate(wishCard)
   }
 
   // animation for closing wish card
-  closeWishCardAnimate = card => {
+  function closeWishCardAnimate(card) {
     let currentHeight = card.style.height;
     let currentWidth = card.style.width;
     currentHeight = parseInt(currentHeight.slice(0, currentHeight.length - 2));
@@ -93,47 +117,101 @@ class Card extends Component {
     let animation = setInterval(resize, 5);
   }
 
-  render() {
-    return (
-      <div className="col s6 m4 l3 flex">
-        <div className="card">
-          <div className="card-image">
-            <a href={this.props.link} target="_new">
-              <img src={this.props.img} alt={this.props.name} />
-            </a>
-          </div>
-          <div className="card-action">
-            <button className="wish" onClick={this.openWishCard} value={this.props._id}>Make a Wish</button>
-          </div>
-        </div>
-        <div id={this.props._id} className="card wishes hidden">
-          <button className="close-wishcard" onClick={this.closeWishCard} value={this.props._id}>&times;</button>
-          <div className="card-content">
-            <ul className="wishlist">
-              {this.props.wishes.map(wish => {
-                return (
-                  <li key={wish._id}>
-                    <span className="username">{wish.username}:</span>
-                    <span className="message"> {wish.message}</span>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-          <div className="card-action">
-            <div className="row chat">
-              <div className="col s8">
-                <input type="text" value={this.state.wishMessage} onChange={this.handleWishMessageInput} placeholder="make a wish" />
-              </div>
-              <div className="col s4">
-                <button className="send-wish" value={this.props._id} onClick={this.sendWishMessage}>Wish</button>
-              </div>
+  function addFavorite(event) {
+    const { value } = event.target;
+    API
+      .addFavorite(value)
+      .then(() => {
+        openModal();
+      })
+  }
+
+  function openModal() {
+    document.getElementById("favorite-modal").classList.add("open");
+  }
+
+  function closeModal() {
+    document.getElementById("favorite-modal").classList.remove("open");
+  }
+
+  function renderFavoriteBtn() {
+    if (state.user.authed) {
+      return (
+        <button className="add-favorite" onClick={addFavorite} value={props._id}>★</button>
+      )
+    } else {
+      return <div />
+    }
+  }
+
+  function renderWishCardBtn() {
+    if (state.user.authed) {
+      return (
+        <div className="card-action">
+          <div className="row chat">
+            <div className="col s8">
+              <input type="text" value={state.wishMessage} onChange={handleWishMessageInput} placeholder="make a wish" />
+            </div>
+            <div className="col s4">
+              <button className="send-wish" value={props._id} onClick={sendWishMessage}>Wish</button>
             </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div className="card-action">
+          <div className="row chat">
+            <div className="col s8">
+              <input type="text" value={state.wishMessage} onChange={handleWishMessageInput} placeholder="sign in first" readOnly />
+            </div>
+            <div className="col s4">
+              <button className="send-wish disabled" value={props._id} onClick={sendWishMessage}>Wish</button>
+            </div>
+          </div>
+        </div>
+      )
+    }
   }
+  return (
+    <div className="col s12 m6 l4 flex">
+      <div className="card">
+        <div className="card-image">
+          <a href={props.link} target="_new">
+            <img src={props.img} alt={props.name} />
+          </a>
+          {renderFavoriteBtn()}
+        </div>
+        <div className="card-content">
+          <p>
+            <a href={props.link} target="_new">
+              {props.name} - ${props.price}
+            </a>
+          </p>
+        </div>
+        <div className="card-action">
+          <button className="wish" onClick={openWishCard} value={props._id}>Make a Wish</button>
+        </div>
+      </div>
+      <div id={props._id} className="card wishes hidden">
+        <button className="close-wishcard" onClick={closeWishCard} value={props._id}>&times;</button>
+        <div className="card-content">
+          <ul className="wishlist">
+            {props.wishes.map(wish => {
+              return (
+                <li key={wish._id}>
+                  <span className="username">{wish.username}:</span>
+                  <span className="message"> {wish.message}</span>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+        {renderWishCardBtn()}
+      </div>
+      <Message id="favorite-modal" message="This polish has been added to your favorites!" onClick={closeModal} />
+    </div>
+  )
 }
 
 export default Card;

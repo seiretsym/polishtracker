@@ -16,7 +16,7 @@ function Nav() {
   }
 
   function openSignOutModal() {
-    document.getElementById("message-modal").classList.add("open");
+    document.getElementById("signout-modal").classList.add("open");
   }
 
   function handleChange(event) {
@@ -28,7 +28,8 @@ function Nav() {
         [id]: {
           filter: value,
           name: name
-        }
+        },
+        rendered: false,
       }
     })
   }
@@ -41,7 +42,7 @@ function Nav() {
           type: AUTH,
           auth: { authed: false }
         })
-        document.getElementById("message-modal").classList.remove("open");
+        document.getElementById("signout-modal").classList.remove("open");
       })
   }
 
@@ -125,10 +126,10 @@ function Nav() {
           <div className="order-div">
             <ul id="order-list" className="dropdown-content">
               <li>
-                <button id="order" name="Ascending" className="link order-link" value="1" onClick={handleChange}>Name</button>
+                <button id="order" name="Ascending" className="link order-link" value="1" onClick={handleChange}>Ascending</button>
               </li>
               <li>
-                <button id="order" name="Descending" className="link order-link" value="-1" onClick={handleChange}>Price</button>
+                <button id="order" name="Descending" className="link order-link" value="-1" onClick={handleChange}>Descending</button>
               </li>
             </ul>
             <input id="order-button" type="text" className="dropdown-button btn order-btn" data-beloworigin="true" data-activates="order-list" value={state.filters.order.name} onChange={handleChange} readOnly />
@@ -146,7 +147,7 @@ function Nav() {
       </div>
       <Registration />
       <Signin />
-      <Message message="You have successfully signed out." onClick={handleSignOut} />
+      <Message id="signout-modal" message="You have successfully signed out." onClick={handleSignOut} />
     </div>
   )
 };

@@ -10,7 +10,7 @@ function handleCloseModal(event) {
 
 function Message(props) {
   return (
-    <div id="message-modal" className="modal">
+    <div id={props.id} className="modal">
       <div className="modal-content">
         <h4>Message</h4>
         <p>{props.message}</p>

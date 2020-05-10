@@ -28,7 +28,7 @@ module.exports = {
     db.User
       .findOneAndUpdate(req.user,
         {
-          $push: {
+          $addToSet: {
             favorites: req.params.id
           }
         })

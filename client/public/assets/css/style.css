@@ -35,6 +35,11 @@ body {
   width: 170px;
 }
 
+.username {
+  color: #e4a1eb;
+  font-weight: bold;
+}
+
 .modal .btn {
   margin-right: 20px !important;
 }
@@ -193,12 +198,39 @@ input[type=text].order-btn:focus:not([readonly]) {
 }
 
 .card-content {
-  text-align: left;
-  padding: 0px !important;
-  height: 75px;
+  padding: 15px 0px !important;
   overflow: auto;
   -ms-overflow-style: none;
 }
+
+.card-content p {
+  text-align: center;
+}
+
+.add-favorite,
+.add-favorite:focus {
+  background-color: transparent;
+  color: #06bbdd !important;
+  text-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
+  position: absolute;
+  border: none;
+  top: -15px;
+  right: 5px;
+  padding: 0px;
+  margin: 0px;
+  font-size: 40px;
+}
+
+.add-favorite:hover {
+  color: #e4a1eb !important;
+}
+
+.disabled {
+  position: relative;
+  display: visible;
+  z-index: -1;
+}
+
 .card-content::-webkit-scrollbar {
   display: none;
 }

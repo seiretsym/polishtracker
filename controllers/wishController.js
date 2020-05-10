@@ -17,15 +17,17 @@ module.exports = {
             },
             {
               $push: {
-                wish: wish._id
+                wishes: wish._id
               }
             },
             {
               new: true
             }).then(() => {
+              console.log("wish added to polish")
               res.status(201).json(true);
             });
       }).catch(err => {
+        console.log(err);
         res.status(401).json(err)
       });
   }
