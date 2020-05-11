@@ -2,15 +2,32 @@ import React, { useEffect } from "react";
 import { useStoreContext } from "../utils/globalState";
 import Card from "../components/Card";
 import API from "../utils/api";
-import { SET_POLISHES, SET_FILTERED_POLISHES } from "../utils/actions";
+import { SET_POLISHES, SET_FILTERED_POLISHES, SET_VIEW, AUTH } from "../utils/actions";
 
 function Main() {
   const [state, dispatch] = useStoreContext();
 
   useEffect(() => {
-    if (state.polishes.length < 1) {
-      API.
-        scrape()
+    if (!state.user.authed) {
+      const user = window.sessionStorage.getItem("user");
+      if (user === "authed") {
+        dispatch({
+          type: AUTH,
+          auth: { authed: true }
+        })
+      }
+    }
+
+    if (state.view !== "main") {
+      dispatch({
+        type: SET_VIEW,
+        view: "main",
+        rendered: false
+      })
+    }
+    if (state.polishes.length < 1 && state.view === "main") {
+      API
+        .scrape()
         .then(() => {
           API
             .getAllPolishes()
@@ -77,7 +94,7 @@ function Main() {
     <div className="container content">
       <div className="row">
         {state.filteredPolishes.map(polish => {
-          return <Card {...polish} key={polish._id} />
+          return <Card key={polish._id} {...polish} />
         })}
       </div>
     </div>

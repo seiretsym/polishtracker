@@ -51,10 +51,12 @@ function Registration() {
     API
       .createUser(data)
       .then(({ data }) => {
+        document.getElementById("register-modal").classList.remove("open");
         dispatch({
           type: AUTH,
           auth: { authed: data }
         })
+        window.sessionStorage.setItem("user", "authed")
       })
       .catch(err => {
         console.log(err);
@@ -72,11 +74,11 @@ function Registration() {
               <label htmlFor="r-username">Username</label>
             </div>
             <div className="input-field col s12">
-              <input type="text" id="r-password" autoComplete="off" />
+              <input type="password" id="r-password" autoComplete="off" />
               <label htmlFor="r-password">password</label>
             </div>
             <div className="input-field col s12">
-              <input type="text" id="r-confirm" autoComplete="off" />
+              <input type="password" id="r-confirm" autoComplete="off" />
               <label htmlFor="r-confirm">Confirm Password</label>
             </div>
           </form>
@@ -118,6 +120,7 @@ function Signin() {
           type: AUTH,
           auth: { authed: data }
         })
+        window.sessionStorage.setItem("user", "authed")
       })
       .catch(err => {
         console.log(err);

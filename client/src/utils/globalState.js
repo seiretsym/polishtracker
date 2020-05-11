@@ -53,6 +53,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     polishes: [],
     filteredPolishes: [],
     rendered: false,
+    view: "main",
     filters: {
       brand: {
         filter: "",

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import API from "../../utils/api";
 import { useStoreContext } from "../../utils/globalState";
-import { Message } from "../Modal";
-import { SET_POLISHES } from "../../utils/actions";
+import { SET_POLISHES, SET_FILTERED_POLISHES } from "../../utils/actions";
 
 function Card(props) {
   const [state, dispatch] = useStoreContext();
@@ -121,24 +120,50 @@ function Card(props) {
     const { value } = event.target;
     API
       .addFavorite(value)
-      .then(() => {
-        openModal();
+      .then((data) => {
+        if (data === "redirect") {
+          window.sessionStorage.removeItem("user")
+          window.location.replace("./")
+        } else {
+          openAddModal();
+        }
       })
   }
 
-  function openModal() {
-    document.getElementById("favorite-modal").classList.add("open");
+  function removeFavorite(event) {
+    const { value } = event.target;
+    API
+      .removeFavorite(value)
+      .then((data) => {
+        if (data === "redirect") {
+          window.sessionStorage.removeItem("user")
+          window.location.replace("./")
+        } else {
+          window.location.reload();
+        }
+      })
   }
 
-  function closeModal() {
-    document.getElementById("favorite-modal").classList.remove("open");
+  function openAddModal() {
+    document.getElementById("add-favorite-modal").classList.add("open");
   }
+
+  function openRemoveModal() {
+    document.getElementById("remove-favorite-modal").classList.add("open");
+  }
+
 
   function renderFavoriteBtn() {
     if (state.user.authed) {
-      return (
-        <button className="add-favorite" onClick={addFavorite} value={props._id}>★</button>
-      )
+      if (state.view === "favorites") {
+        return (
+          <button className="add-favorite" onClick={removeFavorite} value={props._id}>&times;</button>
+        )
+      } else {
+        return (
+          <button className="add-favorite" onClick={addFavorite} value={props._id}>★</button>
+        )
+      }
     } else {
       return <div />
     }
@@ -174,7 +199,7 @@ function Card(props) {
     }
   }
   return (
-    <div className="col s12 m6 l4 flex">
+    <div className="col s12 m6 l4 xl4 flex" key={props._id}>
       <div className="card">
         <div className="card-image">
           <a href={props.link} target="_new">
@@ -209,7 +234,6 @@ function Card(props) {
         </div>
         {renderWishCardBtn()}
       </div>
-      <Message id="favorite-modal" message="This polish has been added to your favorites!" onClick={closeModal} />
     </div>
   )
 }

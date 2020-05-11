@@ -16,7 +16,7 @@ export default {
   getAllPolishes: function () {
     return axios.get("/api/polishes");
   },
-  getAllFavoritess: function () {
+  getAllFavorites: function () {
     return axios.get("/api/polishes/favorites")
   },
   addFavorite: function (id) {

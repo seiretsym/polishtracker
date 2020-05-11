@@ -14,44 +14,63 @@ module.exports = {
       });
   },
   findFavorites: (req, res) => {
-    db.User
-      .find(req.user)
-      .populate("favorites")
-      .then(({ favorites }) => {
-        res.status(200).json(favorites);
-      })
-      .catch(err => {
-        res.status(404).json(err);
-      });
+    if (req.user) {
+      db.User
+        .find({ _id: req.user._id })
+        .populate("favorites")
+        .then(data => {
+          console.log(data);
+          console.log(data[0].favorites);
+          res.status(200).json(data[0].favorites);
+        })
+        .catch(err => {
+          console.log("problem adding polish to user")
+          console.log(err)
+          res.json(err);
+        });
+    } else {
+      res.json("redirect")
+    }
   },
   addFavorite: (req, res) => {
-    db.User
-      .findOneAndUpdate(req.user,
-        {
-          $addToSet: {
-            favorites: req.params.id
-          }
+    if (req.user) {
+      db.User
+        .findOneAndUpdate({ _id: req.user._id },
+          {
+            $addToSet: {
+              favorites: req.params.id
+            }
+          })
+        .then(() => {
+          res.status(201).json(true);
         })
-      .then(() => {
-        res.status(201).json(true);
-      })
-      .catch(err => {
-        res.status(401).json(err);
-      });
+        .catch(err => {
+          res.status(401).json(err);
+        });
+    } else {
+      res.json("redirect");
+    }
   },
   removeFavorite: (req, res) => {
-    db.User
-      .findOneAndUpdate(req.user,
-        {
-          $pull: {
-            polishes: req.params.id
-          }
+    console.log(req.params.id);
+    if (req.user) {
+      db.User
+        .findOneAndUpdate({ _id: req.user._id },
+          {
+            $pull: {
+              favorites: req.params.id
+            }
+          })
+        .then(() => {
+          console.log("removed from favorites")
+          res.status(201).json(true);
         })
-      .then(() => {
-        res.status(201).json(true);
-      })
-      .catch(err => {
-        res.status(401).json(err)
-      });
+        .catch(err => {
+          console.log(err)
+          res.status(401).json(err)
+        });
+    } else {
+      res.json("redirect");
+    }
   }
 };

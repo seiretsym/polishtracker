@@ -8,18 +8,25 @@ body {
 }
 
 .modal {
-  top: 100px;
+  position: fixed !important;
   background-color: rgba(0, 52, 99, 0.9);
   filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
   border: none;
   border-radius: 20px;
   outline: none;
   overflow: visible;
+  top: 200px;
+}
+
+.row {
+  padding-left: 15px;
+  width: 100%;
 }
 
 .open {
-  display: block !important;
-  z-index: 1000 !important;
+  position: fixed !important;
+  display: inline !important;
+  z-index: 10000 !important;
 }
 
 .brand-list,
@@ -32,7 +39,6 @@ body {
 .order-btn {
   color: #e4a1eb !important;
   text-align: left;
-  width: 170px;
 }
 
 .username {
@@ -63,6 +69,13 @@ form .input-field {
   border-radius: 20px;
 }
 
+.brand-button,
+.type-button,
+.sort-button,
+.order-button {
+  /* padding-left: 20px !important; */
+}
+
 form .input-field input {
   color: #06bbdd;
 }
@@ -78,7 +91,6 @@ form .input-field input[type=password],
 form .input-field input[type=password]:focus,
 form .input-field input[type=password]:focus:not([readonly]) {
   margin-bottom: 0px;
-  padding-left: 15px;
   border-bottom: none;
   box-shadow: none;
 }
@@ -96,8 +108,7 @@ input[type=text].order-btn,
 input[type=text].order-btn:focus,
 input[type=text].order-btn:focus:not([readonly]) {
   margin-bottom: 0px;
-  padding-left: 15px;
-  width: 150px;
+  width: calc(100% - 15px) !important;
   border-bottom: none;
   box-shadow: none;
 }
@@ -276,17 +287,19 @@ a:hover {
   margin-top: 20px !important;
   border-radius: 20px;
   filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
-  display: flex;
-  z-index: 1000 ;
+  z-index: 1000;
 }
 
 .brand {
+  position: relative;
   background-color: rgba(0, 52, 99, 0.5);
   padding-bottom: 20px;
   padding-top: 1px;
   margin-top: 20px !important;
   border-radius: 20px;
+  justify-content: center;
   filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
+  z-index: 20000;
 }
 
 .brand-name {
@@ -306,10 +319,21 @@ a:hover {
   text-align: center;
 }
 
-.dropdown-button,
+.dropdown-button {
+  background-color: rgba(0, 0, 55, 0.2);
+  border-radius: 20px;
+  padding-left: 15px !important;
+  width: 100%;
+  outline: none;
+  color: #06bbdd;
+  height: 45px;
+  text-transform: unset;
+}
+
 .modal .dropdown-button {
   background-color: rgba(0, 0, 55, 0.2);
   border-radius: 20px;
+  /* padding-left: 15px; */
   outline: none;
   color: #06bbdd;
   height: 45px;
@@ -355,10 +379,6 @@ a:hover {
   color: #e4a1eb;
 }
 
-.account {
-  margin-left: auto;
-}
-
 .sort,
 .order,
 .type {
@@ -387,10 +407,13 @@ a:hover {
 }
 
 .select-wrapper input {
-  padding: 0px 0px 0px 15px !important;
-  width: 150px !important;
+  /* padding: 0px 0px 0px 15px !important; */
   margin: 0px !important;
   border: none !important;
+}
+
+.nav .col {
+  padding: 0px;
 }
 
 .select-wrapper .dropdown-content {
@@ -399,6 +422,7 @@ a:hover {
   background-color: rgba(0, 52, 99, 0.5);
   filter: drop-shadow(0px 0px 5px rgb(6, 225, 225));
   border-radius: 20px;
+  z-index: 1005;
 }
 
 .select-wrapper .dropdown-content li:hover,

@@ -25,6 +25,8 @@ module.exports = {
             }).then(() => {
               console.log("wish added to polish")
               res.status(201).json(true);
+            }).catch(err => {
+              console.log("problem adding wish to polish")
             });
       }).catch(err => {
         console.log(err);

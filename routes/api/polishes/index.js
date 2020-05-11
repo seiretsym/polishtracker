@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const polishController = require("../../../controllers/polishController");
+const auth = require("../../../passport/auth");
 
 // Matches with "/api/polishes"
 router.route("/")
