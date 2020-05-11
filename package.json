@@ -1,21 +1,57 @@
 {
+<<<<<<< HEAD
   "name": "polishtracker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+=======
+  "name": "sparkles",
+  "version": "1.0.0",
+  "description": "polish tracker",
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcrypt": "^4.0.1",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "if-env": "^1.0.4",
+    "mongoose": "^5.9.13",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "concurrently": "5.1.0"
+  },
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build",
+    "seed": "cd seed && node seed"
+>>>>>>> 8d4b8ea668df91f1d76e45dae1e757a93e0bb30f
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/seiretsym/polishtracker.git"
   },
+<<<<<<< HEAD
   "keywords": [],
   "author": "",
+=======
+  "author": "kerwin hy",
+>>>>>>> 8d4b8ea668df91f1d76e45dae1e757a93e0bb30f
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/seiretsym/polishtracker/issues"
   },
+<<<<<<< HEAD
   "homepage": "https://github.com/seiretsym/polishtracker#readme",
   "dependencies": {
     "axios": "^0.19.0",
@@ -26,4 +62,7 @@
     "mongoose": "^5.7.6",
     "morgan": "^1.9.1"
   }
+=======
+  "homepage": "https://github.com/seiretsym/polishtracker#readme"
+>>>>>>> 8d4b8ea668df91f1d76e45dae1e757a93e0bb30f
 }
