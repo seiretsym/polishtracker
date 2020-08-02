@@ -16,11 +16,14 @@ body {
   outline: none;
   overflow: visible;
   top: 200px;
+  z-index: 20000;
 }
 
 .row {
   padding-left: 15px;
   width: 100%;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
 }
 
 .open {
@@ -299,7 +302,7 @@ a:hover {
   border-radius: 20px;
   justify-content: center;
   filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
-  z-index: 20000;
+  z-index: 2000;
 }
 
 .brand-name {

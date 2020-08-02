@@ -1,19 +1,9 @@
 import React from "react";
 import { useStoreContext } from "../../utils/globalState";
-import { Registration, Signin, Message } from "../Modal";
-import API from "../../utils/api"
-import { AUTH, SET_FILTERS } from "../../utils/actions";
+import { SET_FILTERS } from "../../utils/actions";
 
 function Nav() {
   const [state, dispatch] = useStoreContext();
-
-  function closeAddModal() {
-    document.getElementById("add-favorite-modal").classList.remove("open");
-  }
-
-  function closeRemoveModal() {
-    document.getElementById("remove-favorite-modal").classList.remove("open");
-  }
 
   function handleChange(event) {
     const { id, name, value } = event.target;
@@ -29,21 +19,6 @@ function Nav() {
       }
     })
   }
-
-  function handleSignOut() {
-    API
-      .signout()
-      .then(() => {
-        dispatch({
-          type: AUTH,
-          auth: { authed: false }
-        })
-        window.sessionStorage.removeItem("user");
-        document.getElementById("signout-modal").classList.remove("open");
-      })
-  }
-
-
 
   return (
     <div className="container">
@@ -123,11 +98,6 @@ function Nav() {
           </div>
         </div>
       </div>
-      <Registration />
-      <Signin />
-      <Message id="signout-modal" message="You have successfully signed out." onClick={handleSignOut} />
-      <Message id="add-favorite-modal" message="This polish has been added to your favorites!" onClick={closeAddModal} />
-      <Message id="remove-favorite-modal" message="This polish has been removed from your favorites!" onClick={closeRemoveModal} />
     </div>
   )
 };

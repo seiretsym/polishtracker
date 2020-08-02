@@ -148,11 +148,6 @@ function Card(props) {
     document.getElementById("add-favorite-modal").classList.add("open");
   }
 
-  function openRemoveModal() {
-    document.getElementById("remove-favorite-modal").classList.add("open");
-  }
-
-
   function renderFavoriteBtn() {
     if (state.user.authed) {
       if (state.view === "favorites") {
