@@ -13,7 +13,10 @@ module.exports = {
           axios
             .get(polish.link)
             // removes from db if it doesn't
-            .catch(() => { db.Polish.remove({ _id: polish._id }) })
+            .catch(err => {
+              console.log(err);
+              db.Polish.remove({ _id: polish._id })
+            })
         })
         res.status(200).json(data);
       })
