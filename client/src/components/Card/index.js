@@ -193,8 +193,9 @@ function Card(props) {
       )
     }
   }
+
   return (
-    <div className="col s12 m6 l4 xl4 flex" key={props._id}>
+    <div className="col s12 m6 l4 xl4" key={props._id}>
       <div className="card">
         <div className="card-image">
           <a href={props.link} target="_new">

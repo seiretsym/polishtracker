@@ -20,7 +20,9 @@ body {
 }
 
 .row {
-  padding-left: 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   width: 100%;
   margin-left: 0px !important;
   margin-right: 0px !important;
@@ -133,7 +135,10 @@ input[type=text].order-btn:focus:not([readonly]) {
   filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
   border-radius: 20px;
   padding: 20px;
-  color: #06bbdd
+  color: #06bbdd;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .wish {
@@ -142,10 +147,6 @@ input[type=text].order-btn:focus:not([readonly]) {
   border-radius: 20px;
   padding: 10px;
   width: 100%;
-}
-
-.flex {
-  display: flex;
 }
 
 .hidden {
@@ -212,13 +213,17 @@ input[type=text].order-btn:focus:not([readonly]) {
 }
 
 .card-content {
-  padding: 15px 0px !important;
-  overflow: auto;
-  -ms-overflow-style: none;
+  padding: 15px 0px 0px 0px !important;
+  height: 62px;
 }
 
 .card-content p {
   text-align: center;
+}
+
+.card-image {
+  flex-grow: 1;
+  margin-top: auto;
 }
 
 .add-favorite,
@@ -255,6 +260,8 @@ input[type=text].order-btn:focus:not([readonly]) {
 
 img {
   border-radius: 20px !important;
+  max-height: 350px;
+  max-width: 350px;
 }
 
 .content {
@@ -417,6 +424,11 @@ a:hover {
 
 .nav .col {
   padding: 0px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
 }
 
 .select-wrapper .dropdown-content {

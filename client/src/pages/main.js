@@ -25,6 +25,7 @@ function Main() {
         rendered: false
       })
     }
+
     if (state.polishes.length < 1 && state.view === "main") {
       API
         .scrape()
@@ -44,6 +45,11 @@ function Main() {
 
     if (state.polishes.length > 0 && !state.rendered) {
       filterPolish();
+    }
+
+    if (state.rendered === true) {
+      console.log(1);
+      resizeHeight();
     }
   })
 
@@ -88,6 +94,15 @@ function Main() {
       filteredPolishes: filteredPolishes,
       rendered: true,
     })
+  }
+
+  function resizeHeight() {
+    let cards = document.getElementsByClassName("card-image");
+    for (let i = 0; i < cards.length; i++) {
+      if (cards[i].clientHeight !== cards[i].clientWidth) {
+        cards[i].style.height = cards[i].clientWidth;
+      }
+    }
   }
 
   return (
