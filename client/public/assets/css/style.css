@@ -222,8 +222,10 @@ input[type=text].order-btn:focus:not([readonly]) {
 }
 
 .card-image {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  margin-top: auto;
+  justify-content: flex-end;
 }
 
 .add-favorite,
