@@ -47,10 +47,6 @@ function Main() {
       filterPolish();
     }
 
-    if (state.rendered === true) {
-      console.log(1);
-      resizeHeight();
-    }
   })
 
   function filterPolish() {
@@ -94,15 +90,6 @@ function Main() {
       filteredPolishes: filteredPolishes,
       rendered: true,
     })
-  }
-
-  function resizeHeight() {
-    let cards = document.getElementsByClassName("card-image");
-    for (let i = 0; i < cards.length; i++) {
-      if (cards[i].clientHeight !== cards[i].clientWidth) {
-        cards[i].style.height = cards[i].clientWidth;
-      }
-    }
   }
 
   return (
