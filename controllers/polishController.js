@@ -1,4 +1,5 @@
 const db = require("../models");
+const axios = require("axios");
 
 // defining methods used for polish queries
 module.exports = {
@@ -7,6 +8,13 @@ module.exports = {
       .find({})
       .populate("wishes")
       .then(data => {
+        // check if item still exists
+        data.forEach(polish => {
+          axios
+            .get(polish.link)
+            // removes from db if it doesn't
+            .catch(() => { db.Polish.remove({ _id: polish._id }) })
+        })
         res.status(200).json(data);
       })
       .catch(err => {
