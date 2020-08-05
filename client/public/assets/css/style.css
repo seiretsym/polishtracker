@@ -74,13 +74,6 @@ form .input-field {
   border-radius: 20px;
 }
 
-.brand-button,
-.type-button,
-.sort-button,
-.order-button {
-  /* padding-left: 20px !important; */
-}
-
 form .input-field input {
   color: #06bbdd;
 }
