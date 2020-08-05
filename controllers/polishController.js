@@ -12,8 +12,9 @@ module.exports = {
         data.forEach(polish => {
           axios
             .get(polish.link)
-            // removes from db if it doesn't
+            .then(() => polish)
             .catch(err => {
+              // removes from db if it doesn't
               console.log(err);
               db.Polish.remove({ _id: polish._id })
             })
