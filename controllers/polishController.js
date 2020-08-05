@@ -30,8 +30,6 @@ module.exports = {
         .find({ _id: req.user._id })
         .populate("favorites")
         .then(data => {
-          console.log(data);
-          console.log(data[0].favorites);
           res.status(200).json(data[0].favorites);
         })
         .catch(err => {
@@ -63,7 +61,6 @@ module.exports = {
     }
   },
   removeFavorite: (req, res) => {
-    console.log(req.params.id);
     if (req.user) {
       db.User
         .findOneAndUpdate({ _id: req.user._id },
@@ -77,7 +74,7 @@ module.exports = {
           res.status(201).json(true);
         })
         .catch(err => {
-          console.log(err)
+          console.log("error with: ", polish)
           res.status(401).json(err)
         });
     } else {
