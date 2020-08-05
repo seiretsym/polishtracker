@@ -14,7 +14,7 @@ module.exports = {
             .get(polish.link)
             .catch(err => {
               // removes from db if it doesn't
-              console.log(err);
+              console.log("error with: ", polish.link);
               db.Polish.remove({ _id: polish._id })
             })
         })
@@ -33,8 +33,8 @@ module.exports = {
           res.status(200).json(data[0].favorites);
         })
         .catch(err => {
-          console.log("problem adding polish to user")
-          console.log(err)
+          console.log("problem adding polish to user");
+          console.log(err);
           res.json(err);
         });
     } else {
@@ -74,8 +74,8 @@ module.exports = {
           res.status(201).json(true);
         })
         .catch(err => {
-          console.log("error with: ", polish)
-          res.status(401).json(err)
+          console.log(err);
+          res.status(401).json(err);
         });
     } else {
       res.json("redirect");
