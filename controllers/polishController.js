@@ -1,5 +1,5 @@
 const db = require("../models");
-const axios = require("axios");
+const cheerio = require("cheerio");
 
 // defining methods used for polish queries
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
           axios
             .get(polish.link)
             .then(response => {
-              console.log(response.data);
+              // do nothing lolololol
             })
             .catch(err => {
               // removes from db if it doesn't
