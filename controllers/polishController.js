@@ -12,10 +12,17 @@ module.exports = {
         data.forEach(polish => {
           axios
             .get(polish.link)
+            .then(response => {
+              console.log(response.data);
+            })
             .catch(err => {
               // removes from db if it doesn't
               console.log("error with: ", polish.link);
-              db.Polish.remove({ _id: polish._id })
+              db.Polish
+                .remove({ _id: polish._id })
+                .then(() => {
+                  console.log("polish removed")
+                })
             })
         })
         res.status(200).json(data);
