@@ -1,5 +1,5 @@
 const db = require("../models");
-const cheerio = require("cheerio");
+const axios = require("axios");
 
 // defining methods used for polish queries
 module.exports = {
