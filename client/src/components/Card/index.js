@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import API from "../../utils/api";
 import { useStoreContext } from "../../utils/globalState";
-import { SET_POLISHES, SET_FILTERED_POLISHES } from "../../utils/actions";
+import { SET_POLISHES } from "../../utils/actions";
 
 function Card(props) {
   const [state, dispatch] = useStoreContext();
