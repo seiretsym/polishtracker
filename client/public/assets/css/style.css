@@ -19,18 +19,6 @@ body {
   z-index: 20000;
 }
 
-<<<<<<< HEAD
-=======
-.row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-}
-
->>>>>>> f44a6491b7e0c063a20bca1a15b8f34c040a8237
 .open {
   position: fixed !important;
   display: inline !important;
@@ -222,6 +210,12 @@ input[type=text].order-btn:focus:not([readonly]) {
   flex-direction: column;
   flex-grow: 1;
   justify-content: flex-end;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .add-favorite,
@@ -423,15 +417,10 @@ a:hover {
   padding: 0px 10px 20px 10px;
 }
 
-.col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 !important;
-}
 
 .navbtn {
-  margin: 0 auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .select-wrapper .dropdown-content {
