@@ -205,6 +205,10 @@ input[type=text].order-btn:focus:not([readonly]) {
   text-align: center;
 }
 
+.card-container{
+  display: flex;
+}
+
 .card-image {
   display: flex;
   flex-direction: column;
