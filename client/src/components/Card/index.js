@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import API from "../../utils/api";
 import { useStoreContext } from "../../utils/globalState";
-import { SET_POLISHES, SET_FILTERED_POLISHES } from "../../utils/actions";
+import { SET_POLISHES } from "../../utils/actions";
 
 function Card(props) {
   const [state, dispatch] = useStoreContext();
@@ -148,11 +148,6 @@ function Card(props) {
     document.getElementById("add-favorite-modal").classList.add("open");
   }
 
-  function openRemoveModal() {
-    document.getElementById("remove-favorite-modal").classList.add("open");
-  }
-
-
   function renderFavoriteBtn() {
     if (state.user.authed) {
       if (state.view === "favorites") {
@@ -198,8 +193,9 @@ function Card(props) {
       )
     }
   }
+
   return (
-    <div className="col s12 m6 l4 xl4 flex" key={props._id}>
+    <div className="col s12 m6 l4 xl4" key={props._id}>
       <div className="card">
         <div className="card-image">
           <a href={props.link} target="_new">

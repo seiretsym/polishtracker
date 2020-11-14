@@ -1,7 +1,6 @@
 import React from "react";
 import { useStoreContext } from "../../utils/globalState";
 
-
 function Brand() {
   const [state, dispatch] = useStoreContext();
 
@@ -47,7 +46,7 @@ function Brand() {
       <h1 className="brand-name">Sparkles</h1>
       <h5 className="brand-text">...because your nails deserve to be fabulous!</h5>
       <div className="row">
-        <div className="col s12 l4 offset-l4">
+        <div className="col s12 l4 navbtn">
           <div className="account">
             <ul id="account" className="dropdown-content">
               {renderAccountLinks()}

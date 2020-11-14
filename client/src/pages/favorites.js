@@ -15,6 +15,8 @@ function Main() {
           type: AUTH,
           auth: { authed: true }
         })
+      } else {
+        window.location.replace("/");
       }
     }
     if (state.view !== "favorites") {

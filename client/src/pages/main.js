@@ -25,6 +25,7 @@ function Main() {
         rendered: false
       })
     }
+
     if (state.polishes.length < 1 && state.view === "main") {
       API
         .scrape()
@@ -45,6 +46,7 @@ function Main() {
     if (state.polishes.length > 0 && !state.rendered) {
       filterPolish();
     }
+
   })
 
   function filterPolish() {

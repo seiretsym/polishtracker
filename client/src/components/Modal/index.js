@@ -69,15 +69,15 @@ function Registration() {
         <h4>Account Registration</h4>
         <div className="row">
           <form className="col s12">
-            <div className="input-field col s12">
+            <div className="input-field">
               <input type="text" id="r-username" autoComplete="off" />
               <label htmlFor="r-username">Username</label>
             </div>
-            <div className="input-field col s12">
+            <div className="input-field">
               <input type="password" id="r-password" autoComplete="off" />
               <label htmlFor="r-password">password</label>
             </div>
-            <div className="input-field col s12">
+            <div className="input-field">
               <input type="password" id="r-confirm" autoComplete="off" />
               <label htmlFor="r-confirm">Confirm Password</label>
             </div>
@@ -133,11 +133,11 @@ function Signin() {
         <h4>Account Sign In</h4>
         <div className="row">
           <form className="col s12">
-            <div className="input-field col s12">
+            <div className="input-field">
               <input type="text" id="s-username" autoComplete="off" />
               <label htmlFor="s-userrname">Username</label>
             </div>
-            <div className="input-field col s12">
+            <div className="input-field">
               <input type="password" id="s-password" autoComplete="off" />
               <label htmlFor="s-password">Password</label>
             </div>
