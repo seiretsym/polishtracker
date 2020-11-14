@@ -18,11 +18,6 @@ body {
   top: 200px;
 }
 
-.row {
-  padding-left: 15px;
-  width: 100%;
-}
-
 .open {
   position: fixed !important;
   display: inline !important;
@@ -280,22 +275,27 @@ a:hover {
   color: #06bbdd;
 }
 
+.container .row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
 .nav {
   position: relative;
   background-color: rgba(0, 52, 99, 0.5);
-  padding: 20px;
   margin-top: 20px !important;
+  padding: 20px 10px 0px 10px;
   border-radius: 20px;
   filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
   z-index: 1000;
+  width: 100%;
 }
 
 .brand {
   position: relative;
   background-color: rgba(0, 52, 99, 0.5);
-  padding-bottom: 20px;
-  padding-top: 1px;
   margin-top: 20px !important;
+  padding-bottom: 15px;
   border-radius: 20px;
   justify-content: center;
   filter: drop-shadow(0px 0px 10px rgb(8, 67, 126));
@@ -379,15 +379,9 @@ a:hover {
   color: #e4a1eb;
 }
 
-.sort,
-.order,
-.type {
-  margin-left: 20px;
-}
-
 .nav .input-field {
   color: #e4a1eb;
-  margin: 0px 15px 0px 0px !important;
+  margin: 0px 0px 0px 0px !important;
   background-color: rgba(0, 0, 55, 0.2);
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 55, 0.2));
   border-radius: 20px;
@@ -413,7 +407,7 @@ a:hover {
 }
 
 .nav .col {
-  padding: 0px;
+  padding: 0px 10px 20px 10px;
 }
 
 .select-wrapper .dropdown-content {

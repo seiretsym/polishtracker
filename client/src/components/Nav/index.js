@@ -48,7 +48,7 @@ function Nav() {
   return (
     <div className="container">
       <div className="nav row">
-        <div className="col s3">
+        <div className="col s6 m6 l3">
           <div className="input-field collections">
             <div className="brand-div">
               <ul id="brand-list" className="dropdown-content">
@@ -68,7 +68,7 @@ function Nav() {
             </div>
           </div>
         </div>
-        <div className="col s3">
+        <div className="col s6 m6 l3">
           <div className="input-field type">
             <div className="type-div">
               <ul id="type-list" className="dropdown-content">
@@ -88,7 +88,7 @@ function Nav() {
             </div>
           </div>
         </div>
-        <div className="col s3">
+        <div className="col s6 m6 l3">
           <div className="input-field sort">
             <div className="sort-div">
               <ul id="sort-list" className="dropdown-content">
@@ -105,7 +105,7 @@ function Nav() {
             </div>
           </div>
         </div>
-        <div className="col s3">
+        <div className="col s6 m6 l3">
           <div className="input-field order">
             <div className="order-div">
               <ul id="order-list" className="dropdown-content">
